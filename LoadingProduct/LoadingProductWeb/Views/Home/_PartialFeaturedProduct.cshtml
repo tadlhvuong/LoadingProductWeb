@@ -1,0 +1,58 @@
+﻿@model PagedList<ShopItem> 
+<h2 class="slider-title">
+       <span class="inline-title">SẢN PHẨM NỔI BẬT</span>
+        <span class="line"></span>
+</h2>
+<ul class="products-grid columns5">
+    @foreach (var item in Model.Content)
+    {
+
+        <li>
+            <div class="product">
+                <figure class="product-image-area">
+                    <a href="@Url.Action("Detail","Product",new { id = item.Id })" title="@item.Name" class="product-image">
+                        <img src="@item.Image" alt="Product Name" style="object-fit: cover; width:100%; height:200px">
+                        @*<img src="@item.Preview" alt="Product Name" class="product-hover-image" style="object-fit: cover; width:100%; height:200px">*@
+                    </a>
+
+                    <a href="#" class="product-quickview" data-toggle="modal" data-target=".quickview-modal" id="@item.Id">
+                        <i class="fa fa-share-square-o"></i>
+                        <span>Xem nhanh</span>
+                    </a>
+                    @if (item.SalePrice != item.RegularPrice)
+                    {
+                        <div class="product-label"><span class="discount">@item.DiscountPercent</span></div>
+                    }
+                    @if (item.NewProduct)
+                    {
+                        <div class="product-label"><span class="new">Mới</span></div>
+                    }
+
+                    <div class="product-actions">
+                        <a href="#" onclick="return AddProductToWishlist(@item.Id)" class="addtowishlist" title="Yêu thích">
+                            <i class="fa fa-heart"></i>
+                        </a>
+                        <a href="#" onclick="return AddToCart(@item.Id, 1)" class="addtocart" title="Thêm vào giỏ" data-toggle="modal" data-target=".addtocart-modal">
+                            <i class="fa fa-shopping-cart"></i>
+                        </a>
+                    </div>
+                </figure>
+                <div class="product-details-area">
+                    <h2 class="product-name"><a href="@Url.Action("Detail","Product",new { id = item.Id })" title="@item.Name">@item.Name</a></h2>
+                    <div class="product-ratings">
+                        <div class="ratings-box">
+                            <div class="rating" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    <div class="product-price-box">
+                        @if (item.SalePrice != item.RegularPrice)
+                        {
+                            <span class="old-price"> @Convert.ToDecimal(item.RegularPrice).ToString("#,#đ") </span>
+                        }
+                        <span class="product-price">@Convert.ToDecimal(item.CurrentPrice).ToString("#,#đ")</span>
+                    </div>
+                </div>
+            </div>
+        </li>
+    }
+</ul>

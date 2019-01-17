@@ -1,0 +1,61 @@
+﻿@using TCVWeb.Areas.Admin.Models
+@model TwoFactorAuthenticationViewModel
+@{
+    ViewBag.Title = "Dashboard";
+}
+
+<section role="main" class="content-body">
+    <header class="page-header">
+        <h2><i class="fa @ViewBag.Icon"></i> @ViewBag.Title</h2>
+        <div class="right-wrapper pull-right">
+            <ol class="breadcrumbs">
+                <li>
+                    <a href="@Url.Action("Index", "Home")">
+                        <i class="fa fa-home"></i>
+                    </a>
+                </li>
+                <li><span>Dashboard</span></li>
+            </ol>
+            <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
+        </div>
+    </header>
+    <div class="mt-md">
+        <h4>Bảo mật 2 lớp</h4>
+        @if (Model.Is2faEnabled)
+        {
+            if (Model.RecoveryCodesLeft == 0)
+            {
+                <div class="alert alert-danger">
+                    <b>Bạn không còn mã cứu hộ nào</b>
+                    <p>Bạn phải <a asp-action="GenerateRecoveryCodesWarning">Reset mã cứu hộ</a> đăng nhập trong trường hợp mất thiết bị Authenticator.</p>
+                </div>
+            }
+            else if (Model.RecoveryCodesLeft == 1)
+            {
+                <div class="alert alert-danger">
+                    <b>You have 1 recovery code left.</b>
+                    <p>You can <a asp-action="GenerateRecoveryCodesWarning">generate a new set of recovery codes</a>.</p>
+                </div>
+            }
+            else if (Model.RecoveryCodesLeft <= 3)
+            {
+                <div class="alert alert-warning">
+                    <b>Bạn chỉ còn lại @Model.RecoveryCodesLeft mã cứu hộ.</b>
+                    <p>Bạn nên <a asp-action="GenerateRecoveryCodesWarning">Reset mã cứu hộ</a> để phòng khi mất thiết bị Authenticator.</p>
+                </div>
+            }
+            <a asp-action="GenerateRecoveryCodesWarning" class="btn btn-default">Reset mã cứu hộ</a>
+        }
+        <h5>Ứng dụng Authenticator</h5>
+        @if (!Model.HasAuthenticator)
+        {
+            <a asp-action="EnableAuthenticator" class="btn btn-default">Thiết lập Authenticator</a>
+        }
+        else
+        {
+            <a asp-action="EnableAuthenticator" class="btn btn-default">Thiết lập Authenticator</a>
+            <a asp-action="ResetAuthenticatorWarning" class="btn btn-default">Reset mã Authenticator</a>
+        }
+    </div>
+    <h3>Địc chỉ IP: @Context.Request.HttpContext.Connection.RemoteIpAddress</h3>
+</section>

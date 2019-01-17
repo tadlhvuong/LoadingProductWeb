@@ -1,0 +1,41 @@
+﻿@model Taxonomy
+@{
+    Layout = null;
+    string formTitle = Model.Id == 0 ? "Tạo Phân loại mới" : "Cập nhật Phân loại";
+}
+@using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "modalForm", @autocomplete = "off" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 class="modal-title"><i class="fa fa-windows"></i> @formTitle</h3>
+    </div>
+    <div class="modal-body">
+        <div class="form-horizontal">
+            @Html.ValidationSummary("", new { @class = "text-danger" })
+            @Html.HiddenFor(m => m.Id)
+            <div class="form-group">
+                @Html.LabelFor(m => m.ParentId, new { @class = "col-sm-3 control-label" })
+                <div class="col-sm-6">
+                    @Html.DropDownListFor(m => m.ParentId, null, "== Phân loại cấp trên ==", new { @class = "form-control" })
+                </div>
+                <div class="col-sm-3">
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Name, new { @class = "col-sm-3 control-label" })
+                <div class="col-sm-6">
+                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control", required = "" })
+                </div>
+                <div class="col-sm-3">
+                    <i>Tên phân loại</i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <span id="progress" class="text-center" style="display: none;"><img src="~/img/wait.gif" alt="waiting..." />Saving...</span>
+        <button class="btn btn-primary" type="submit"><i class="fa fa-save"></i> Lưu lại</button>
+        <button class="btn btn-warning" data-dismiss="modal"><i class="fa fa-undo"></i> Hủy bỏ</button>
+    </div>
+}

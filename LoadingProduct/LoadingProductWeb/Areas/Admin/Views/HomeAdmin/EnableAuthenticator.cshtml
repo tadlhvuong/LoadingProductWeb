@@ -1,0 +1,93 @@
+﻿@using TCVWeb.Areas.Admin.Models
+@model EnableAuthenticatorViewModel
+@{
+    ViewBag.Icon = "fa-check";
+    ViewBag.Title = "Tạo mã Authenticator";
+}
+
+<section role="main" class="content-body">
+    <header class="page-header">
+        <h2><i class="fa @ViewBag.Icon"></i> @ViewBag.Title</h2>
+        <div class="right-wrapper pull-right">
+            <ol class="breadcrumbs">
+                <li>
+                    <a href="@Url.Action("Index", "Home")">
+                        <i class="fa fa-home"></i>
+                    </a>
+                </li>
+                <li><span>Authenticator</span></li>
+            </ol>
+            <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
+        </div>
+    </header>
+    <div class="row">
+        <div class="col-sm-4">
+            <a class="btn btn-primary" href="@Url.Action("Index")"><i class="fa fa-undo"></i> Quay lại</a>
+        </div>
+        <div class="col-sm-8 text-right">
+        </div>
+    </div>
+    <div class="mt-md">
+        <p>Các bước thực hiện liên kết với ứng dụng Authenticator:</p>
+        <ol class="list">
+            <li>
+                Tải một trong các ứng dụng Authenticator như sau:
+                <p>
+                    <b>Google Authenticator</b>
+                    <ul>
+                        <li><a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&amp;hl=en" target="_blank">Phiên bản Android</a></li>
+                        <li><a href="https://itunes.apple.com/us/app/google-authenticator/id388497605?mt=8" target="_blank">Phiên bản iOS</a></li>
+                    </ul>
+                </p>
+                <p>
+                    <b>Microsoft Authenticator</b>
+                    <ul>
+                        <li><a href="https://go.microsoft.com/fwlink/?Linkid=825071" target="_blank">Phiên bản Windows Phone</a></li>
+                        <li><a href="https://go.microsoft.com/fwlink/?Linkid=825072" target="_blank">Phiên bản Android</a></li>
+                        <li><a href="https://go.microsoft.com/fwlink/?Linkid=825073" target="_blank">Phiên bản iOS</a></li>
+                    </ul>
+                </p>
+            </li>
+            <li>
+                <p>Mở ứng dụng rồi quét QRCode dưới đây hoặc nhập đoạn mã <kbd>@Model.SharedKey</kbd></p>
+                <div id="qrCode"></div>
+                <div id="qrCodeData" data-url="@Model.AuthenticatorUri"></div>
+            </li>
+            <li>
+                <p>
+                    Cuối cùng, nhập mã số nhận được từ ứng dụng Authenticator để hoàn tất liên kết
+                </p>
+                <div class="row">
+                    <div class="col-md-6">
+                        <form method="post">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+                                <label asp-for="Code"></label>
+                                <input asp-for="Code" class="form-control" autocomplete="off" />
+                                <span asp-validation-for="Code" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-6 text-right">
+                                    <button type="submit" class="btn btn-primary btn-block hidden-xs"><i class="fa fa-check"></i> Xác nhận</button>
+                                    <button type="submit" class="btn btn-primary btn-block btn-lg visible-xs mt-lg"><i class="fa fa-check"></i> Xác nhận</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </li>
+        </ol>
+    </div>
+</section>
+@section Scripts {
+    <partial name="_PartialValidation" />
+    <script type="text/javascript" src="~/js/qrcode.min.js"></script>
+    <script type="text/javascript">
+        new QRCode(document.getElementById("qrCode"),
+            {
+                text: "@Html.Raw(Model.AuthenticatorUri)",
+                width: 150,
+                height: 150
+            });
+    </script>
+}

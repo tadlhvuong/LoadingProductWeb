@@ -1,0 +1,27 @@
+﻿@using TCVWeb.Areas.Admin.Models
+@model LoginWithRecoveryCodeViewModel
+@{
+    ViewBag.Title = "Đăng nhập bằng mã cứu hộ";
+}
+<div class="panel-body">
+    <form method="post">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <input asp-for="ReturnUrl" type="hidden" />
+        <div class="form-group">
+            <label asp-for="RecoveryCode"></label>
+            <input asp-for="RecoveryCode" class="form-control" autocomplete="off" />
+            <span asp-validation-for="RecoveryCode" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-6">
+            </div>
+            <div class="col-sm-6 text-right">
+                <button type="submit" class="btn btn-primary btn-block hidden-xs"><i class="fa fa-check"></i> Xác nhận</button>
+                <button type="submit" class="btn btn-primary btn-block btn-lg visible-xs mt-lg"><i class="fa fa-check"></i> Xác nhận</button>
+            </div>
+        </div>
+    </form>
+</div>
+@section Scripts {
+    <partial name="_PartialValidation" />
+}

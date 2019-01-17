@@ -1,0 +1,32 @@
+﻿@using TCVWeb.Areas.Admin.Models
+@model UpdateOrderModel
+@{
+    Layout = null;
+}
+<form asp-action="UpdateOrder" method="post" class="modalForm" autocomplete="off">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 class="modal-title"><i class="fa fa-windows"></i> Cập nhật thông tin</h3>
+    </div>
+    <div class="modal-body">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        @Html.HiddenFor(m => m.Id)
+        <div class="form-group">
+            <label asp-for="OrderStatus" class="col-sm-3 control-label"></label>
+            <div class="col-sm-9">
+                <select asp-for="OrderStatus" asp-items="@Html.GetEnumSelectList(Model.OrderStatus.GetType())" class="form-control"></select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="OrderStatus" class="col-sm-3 control-label"></label>
+            <div class="col-sm-9">
+                <select asp-for="PaymentStatus" asp-items="@Html.GetEnumSelectList(Model.PaymentStatus.GetType())" class="form-control"></select>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <span id="progress" class="text-center" style="display: none;"><img src="~/img/wait.gif" alt="waiting..." />Saving...</span>
+        <button class="btn btn-primary" type="submit"><i class="fa fa-save"></i> Lưu lại</button>
+        <button class="btn btn-warning" data-dismiss="modal"><i class="fa fa-undo"></i> Hủy bỏ</button>
+    </div>
+</form>

@@ -1,0 +1,91 @@
+﻿@using TCVWeb.Areas.Admin.Models
+@model BlogPost
+@{
+    Layout = null;
+    var catList = (List<SelectItemModel>)ViewBag.PostCats;
+}
+
+<div class="form-horizontal">
+    @Html.HiddenFor(m => m.Id)
+    @Html.HiddenFor(m => m.CreateUser)
+    @Html.HiddenFor(m => m.CreateTime)
+    @Html.HiddenFor(m => m.LastStatus)
+
+    <div class="row">
+        <div class="col-md-7">
+            <div class="form-group">
+                <label asp-for="Title" class="col-sm-3 control-label"></label>
+                <div class="col-sm-9">
+                    <input asp-for="Title" class="form-control" , @required="" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Format" class="col-sm-3 control-label"></label>
+                <div class="col-sm-9">
+                    <select asp-for="Format" asp-items="@Html.GetEnumSelectList(Model.Format.GetType())" class="form-control"></select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="PostCats" class="col-sm-3 control-label"></label>
+                <div class="col-sm-9">
+                    <select multiple id="PostCats" name="PostCats" class="form-control">
+                        @if (catList != null)
+                        {
+                            @foreach (var item in catList)
+                            {
+                                if (item.selected)
+                                {
+                                    <option value="@item.id" selected>@item.text</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.id">@item.text</option>
+                                }
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="PostTags" class="col-sm-3 control-label"></label>
+                <div class="col-sm-9">
+                    <input asp-for="PostTags" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="ExtLink" class="col-sm-3 control-label"></label>
+                <div class="col-sm-9">
+                    <textarea asp-for="ExtLink" class="form-control" rows="3"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Preview" class="col-sm-3 control-label"></label>
+                <div class="col-sm-9">
+                    <textarea asp-for="Preview" class="form-control" rows="4"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Status" class="col-sm-3 control-label"></label>
+                <div class="col-sm-9">
+                    <select asp-for="Status" asp-items="@Html.GetEnumSelectList(Model.Status.GetType())" class="form-control"></select>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="thumb-info mb-md">
+                @Html.HiddenFor(m => m.Image)
+                <img src="@Model.Image" id="avatar" class="rounded img-responsive" alt="">
+                <div class="thumb-info-title">
+                    <a class="btn btn-primary" href="@Url.Action("FileBrowser", "Media", new { @input = "Image", @image = "avatar" })" data-modal="" title="Cập nhật hình đại diện"><i class="fa fa-edit"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <h1>Nội dung</h1>
+    <div class="form-group">
+        <div class="col-md-12">
+            @Html.SummerNoteFor(m => m.Content)
+        </div>
+    </div>
+</div>

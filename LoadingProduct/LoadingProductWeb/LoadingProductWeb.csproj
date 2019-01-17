@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <UserSecretsId>aspnet-TCVWeb-3A72BC2E-007A-4956-9480-F193A47FBBAA</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BuildBundlerMinifier" Version="2.8.391" />
+    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.4" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.5" PrivateAssets="All" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.1.2" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Content Remove="wwwroot\index.html" />
+    <Content Remove="wwwroot\manifest.json" />
+    <Content Remove="wwwroot\lib\manifest.json" />
+    <Content Remove="Views\Account\LoginCodeView.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Update="Views\Home\About.cshtml">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Resources\Home.Designer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="media\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="wwwroot\index.html" />
+    <None Include="wwwroot\lib\manifest.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LoadingProductShared\LoadingProductShared.csproj" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,103 @@
+﻿@model String[]
+<aside class="col-md-3 col-md-pull-9 sidebar shop-sidebar">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle" data-toggle="collapse" href="#panel-filter-category">
+                        Danh mục
+                    </a>
+                </h4>
+            </div>
+            <div id="panel-filter-category" class="accordion-body collapse in">
+                <div class="panel-body">
+                    <ul>
+                        @for (var i = 0; i < Model.Length; i++)
+                    {
+                        <li><a href="@Url.Action("Category","Product", new { id =i+11})">@Model[i]</a></li>
+                }
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle" data-toggle="collapse" href="#panel-filter-price">
+                        Giá 
+                    </a>
+                </h4>
+            </div>
+            <div id="panel-filter-price" class="accordion-body collapse in">
+                <div class="panel-body">
+                    <div class="filter-price">
+                        <form action="Category" autocomplete="on">
+                            <div class="filter-price-details">
+                                <span>Từ</span>
+                                <input type="text" id="price-range-low" class="form-control" placeholder="Min" name="minPrice">
+                                <span>Đến</span>
+                                <input type="text" id="price-range-high" class="form-control" placeholder="Max" name="maxPrice">
+
+                                <input class="btn btn-primary" type="submit" value="LỌC"/>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>        
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle" data-toggle="collapse" href="#panel-filter-origin">
+                        Nước sản xuất
+                    </a>
+                </h4>
+            </div>
+            <div id="panel-filter-origin" class="accordion-body collapse in">
+                <div class="panel-body">
+                    <ul>
+                        <li><a href="@Url.Action("Category", "Product",new {origin = "VN"})">Vietnam</a></li>
+                        <li><a href="@Url.Action("Category", "Product",new {origin = "IL"})">Israel</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle" data-toggle="collapse" href="#panel-filter-from">
+                        Xuất xứ
+                    </a>
+                </h4>
+            </div>
+            <div id="panel-filter-from" class="accordion-body collapse in">
+                <div class="panel-body">
+                    <ul>
+                        <li><a href="@Url.Action("Category", "Product",new {from = "D"})">Nội địa</a></li>
+                        <li><a href="@Url.Action("Category", "Product",new {from = "F"})">Ngoại nhập</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        @*<div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle" data-toggle="collapse" href="#panel-filter-brand">
+                        Brands
+                    </a>
+                </h4>
+            </div>
+            <div id="panel-filter-brand" class="accordion-body collapse in">
+                <div class="panel-body">
+                    <ul>
+                        <li><a href="#">Thương hiệu 1</a></li>
+                        <li><a href="#">Thương hiệu 2</a></li>
+                        <li><a href="#">Thương hiệu 3</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>*@
+
+    </div>
+</aside>

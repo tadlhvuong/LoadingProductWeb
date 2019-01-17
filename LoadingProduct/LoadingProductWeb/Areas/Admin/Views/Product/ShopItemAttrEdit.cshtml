@@ -1,0 +1,176 @@
+﻿@model ShopItemAttrib
+@{
+    Layout = null;
+    string modalTitle = Model.Id == 0 ? "Thêm Thuộc tính mới" : "Cập nhật Thuộc tính";
+    var album = ViewBag.MediaAlbum;
+}
+@using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "modalForm", @autocomplete = "off" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 class="modal-title"><i class="fa fa-windows"></i> @modalTitle</h3>
+    </div>
+    <div class="modal-body">
+        <div class="form-horizontal">
+            @Html.ValidationSummary("", new { @class = "text-danger" })
+            @Html.HiddenFor(m => m.Id)
+            @Html.HiddenFor(m => m.ItemId)
+            <div class="form-group">
+                @Html.LabelFor(m => m.AttrId, new { @class = "col-sm-3 control-label" })
+                <div class="col-sm-9">
+                    @Html.DropDownListFor(m => m.AttrId, null, "== Chọn thuộc tính ==", new { @class = "form-control", @required = "" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.IsRequired, new { @class = "col-sm-3 control-label" })
+                <div class="col-sm-9">
+                    <label>@Html.CheckBoxFor(m => m.IsRequired) Người mua phải chọn khi đặt hàng</label>
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.HiddenFor(m => m.Values)
+                <label class="col-sm-3 control-label">Hình ảnh</label>
+                <div class="col-sm-3">
+                    @if (album != null)
+                    {
+                        <div class="owl-carousel owl-theme">
+                            @foreach (var file in album.MediaFiles)
+                            {
+                                <div class="item"><img class="img-thumbnail" src="@file.FileLink" alt=""></div>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-warning">
+                            <p class="text-center">Sản phẩm chưa có thư viện Hình ảnh</p>
+                        </div>
+                    }
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <label>@Html.CheckBox("UseImg", false) Thuộc tính có hình ảnh</label>
+                            @Html.Hidden("Image")
+                        </div>
+                        <label class="col-sm-3 control-label">Bảng giá trị</label>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            @Html.TextBox("Value", null, new { @class = "form-control", @placeholder = "Giá trị" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            @Html.TextBox("Title", null, new { @class = "form-control", @placeholder = "Diễn giải" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-6">
+                        </div>
+                        <div class="col-sm-6">
+                            <button class="btn btn-sm btn-block btn-success btnAddRow"><i class="fa fa-plus"></i> Thêm vào Danh sách</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-10 col-sm-offset-2">
+                    <table id="valuesList" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Giá trị</th>
+                                <th>Tiêu đề</th>
+                                <th>Hình ảnh</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.ValuesList)
+                            {
+                                <tr>
+                                    <td>@item.Value</td>
+                                    <td>@item.Title</td>
+                                    <td>@item.Image</td>
+                                    <td><button class="btn btn-xs btn-danger btnDelRow" data-value="@item.Value" title="Xóa giá trị này"><i class="fa fa-times"></i></button></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <span id="progress" class="text-center" style="display: none;"><img src="/Assets/img/wait.gif" alt="waiting..." />Saving...</span>
+        <button class="btn btn-primary" type="submit"><i class="fa fa-save"></i> Lưu lại</button>
+        <button class="btn btn-warning" data-dismiss="modal"><i class="fa fa-undo"></i> Hủy bỏ</button>
+    </div>
+}
+<script>
+    var valuesData = JSON.parse('@Html.Raw(Model.Values)');
+
+    function updateValuesTable() {
+        $("#valuesList tbody").empty();
+        console.log(valuesData);
+        for (i = 0; i < valuesData.length; i = i + 1) {
+            var row = $("<tr />");
+            var btn = $('<button class="btn btn-xs btn-danger btnDelRow" title="Xóa giá trị này"><i class="fa fa-times"></i></button>');
+            btn.data("value", valuesData[i].Value);
+            row.append($("<td />").html(valuesData[i].Value));
+            row.append($("<td />").html(valuesData[i].Title));
+            row.append($("<td />").html(valuesData[i].Image));
+            row.append($("<td />").html(btn));
+            $("#valuesList tbody").append(row);
+        }
+        $("#Values").val(JSON.stringify(valuesData));
+    }
+
+    $(document).ready(function () {
+        $(".owl-carousel").owlCarousel({
+            "loop": true, "margin": 10, "nav": true, "items": 1
+        }).on('changed.owl.carousel', function (e) {
+            var current = e.item.index;
+            var src = $(e.target).find(".owl-item").eq(current).find("img").attr('src');
+            $("#Image").val(src);
+        });
+    });
+
+    $(document).on("click", ".btnAddRow", function (e) {
+        e.preventDefault();
+
+        var curValue = $("#Value").val();
+        if (curValue.length === 0)
+            return;
+
+        for (var i = valuesData.length - 1; i >= 0; i--) {
+            if (valuesData[i].Value === curValue) {
+                return;
+            }
+        }
+
+        var curTitle = $("#Title").val();
+        var curImage = $("#Image").val();
+        if ($("#UseImg").is(":checked") && curImage) {
+            valuesData.push({ "Value": curValue, "Title": curTitle, "Image": curImage });
+        }
+        else {
+            valuesData.push({ "Value": curValue, "Title": curTitle });
+        }
+
+        updateValuesTable();
+    });
+
+    $(document).on("click", ".btnDelRow", function (e) {
+        e.preventDefault();
+        var curValue = $(this).data("value");
+        for (var i = valuesData.length - 1; i >= 0; i--) {
+            if (valuesData[i].Value === curValue) {
+                valuesData.splice(i, 1);
+                break;
+            }
+        }
+        updateValuesTable();
+    });
+</script>

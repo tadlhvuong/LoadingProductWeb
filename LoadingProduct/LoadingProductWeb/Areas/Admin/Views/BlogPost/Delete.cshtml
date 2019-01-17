@@ -1,0 +1,67 @@
+﻿@model BlogPost
+@{
+    Layout = null;
+    ViewBag.Title = "Xóa bài viết";
+}
+<form class="modalForm" asp-action="Delete" method="post" autocomplete="off">
+    <section class="card">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 class="modal-title"><i class="fa fa-windows"></i> @ViewBag.Title</h3>
+        </div>
+        <div class="modal-body">
+            <div class="form-horizontal">
+                @Html.ValidationSummary("", new { @class = "text-danger" })
+                @Html.HiddenFor(m => m.Id)
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Title, new { @class = "col-sm-3 control-label" })
+                    <div class="col-sm-6">
+                        @Html.DisplayFor(m => m.Title)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Status, new { @class = "col-sm-3 control-label" })
+                    <div class="col-sm-6">
+                        @Html.DisplayFor(m => m.Status)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Preview, new { @class = "col-sm-3 control-label" })
+                    <div class="col-sm-6">
+                        @Html.DisplayFor(m => m.Preview)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.CreateUser, new { @class = "col-sm-3 control-label" })
+                    <div class="col-sm-6">
+                        @Html.DisplayFor(m => m.CreateUser)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.CreateTime, new { @class = "col-sm-3 control-label" })
+                    <div class="col-sm-6">
+                        @Html.DisplayFor(m => m.CreateTime)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.UpdateUser, new { @class = "col-sm-3 control-label" })
+                    <div class="col-sm-6">
+                        @Html.DisplayFor(m => m.UpdateUser)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.LastUpdate, new { @class = "col-sm-3 control-label" })
+                    <div class="col-sm-6">
+                        @Html.DisplayFor(m => m.LastUpdate)
+                    </div>
+                </div>
+            </div>
+            <h3 class="text-danger text-center">Bạn thực sự muốn xóa???</h3>
+        </div>
+        <div class="modal-footer text-right">
+            <span id="progress" class="text-center" style="display: none;"><img src="~/img/wait.gif" alt="waiting..." />Saving...</span>
+            <button class="btn btn-danger" type="submit"><i class="fa fa-times"></i> Xóa luôn</button>
+            <button class="btn btn-warning" data-dismiss="modal"><i class="fa fa-undo"></i> Hủy bỏ</button>
+        </div>
+    </section>
+</form>

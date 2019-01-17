@@ -1,0 +1,74 @@
+﻿@using TCVWeb.Areas.Admin.Models
+@model MemberSearchModel
+@{
+    ViewBag.Icon = "fa-search";
+    ViewBag.Title = "Tìm kiếm Thành viên";
+    var usersList = Model.Results ?? new List<AppUser>();
+}
+<section role="main" class="content-body">
+    <header class="page-header">
+        <h2><i class="fa @ViewBag.Icon"></i> @ViewBag.Title</h2>
+        <div class="right-wrapper pull-right">
+            <ol class="breadcrumbs">
+                <li>
+                    <a href="@Url.Action("Index", "Home")">
+                        <i class="fa fa-home"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("Index")">Thành viên</a>
+                </li>
+                <li>
+                    <span>Tìm kiếm</span>
+                </li>
+            </ol>
+            <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
+        </div>
+    </header>
+    <div class="row">
+        <div class="col-sm-4">
+            <a class="btn btn-primary" href="@Url.Action("Index")"> <i class="fa fa-undo"></i> Quay lại</a>
+        </div>
+        <div class="col-sm-8 text-right">
+        </div>
+    </div>
+    <div class="mt-md">
+        <form method="post" class="form-inline" autocomplete="off">
+            <input type="radio" asp-for="FindMode" value="1" /><span>&nbsp;&nbsp;Chính xác từ cần tìm&nbsp;&nbsp;</span>
+            <input type="radio" asp-for="FindMode" value="2" /><span>&nbsp;&nbsp;Bắt đầu với từ cần tìm&nbsp;&nbsp;</span>
+            <input type="radio" asp-for="FindMode" value="3" /><span>&nbsp;&nbsp;Chứa từ cần tìm&nbsp;&nbsp;</span>
+            <input asp-for="UserName" class="form-control" style="width:180px;" placeholder="Tên tài khoản" /><span>&nbsp;&nbsp;</span>
+            <input asp-for="Email" class="form-control" style="width:180px;" placeholder="Địa chỉ email" /><span>&nbsp;&nbsp;</span>
+            <input asp-for="PhoneNumber" class="form-control" style="width:180px;" placeholder="Số điện thoại" /><span>&nbsp;&nbsp;</span>
+            <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i> Tìm kiếm</button><span>&nbsp;&nbsp;</span>
+        </form>
+    </div>
+    <div class="mt-md">
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover">
+                <tr>
+                    <th>User</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Create Time</th>
+                    <th>Last Update</th>
+                    <th>Action</th>
+                </tr>
+                @foreach (var item in usersList)
+                {
+                    <tr>
+                        <td>@item.UserName</td>
+                        <td>@item.Email</td>
+                        <td>@item.PhoneNumber</td>
+                        <td>@Html.DisplayFor(m => item.CreateTime)</td>
+                        <td>@Html.DisplayFor(m => item.LastUpdate)</td>
+                        <td>
+                            @Html.DetailsLink("Details", new { @id = item.Id })
+                            @Html.UpdateLink("Update", new { @id = item.Id }, true)
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</section>

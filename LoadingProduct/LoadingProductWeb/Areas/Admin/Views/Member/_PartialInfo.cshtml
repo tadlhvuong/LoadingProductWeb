@@ -1,0 +1,50 @@
+﻿@model AppUser
+<div class="row">
+    <div class="col-md-3 text-center">
+        <h3>@Html.DisplayFor(m => m.UserName)</h3>
+        <hr />
+    </div>
+    <div class="col-md-9">
+        <div class="row">
+            <div class="col-sm-6">
+                <dl class="dl-horizontal">
+                    <dt>@Html.DisplayNameFor(m => m.Email)</dt>
+                    @if (Model.EmailConfirmed)
+                    {
+                        <dd>@Html.DisplayFor(m => m.Email) (Đã xác thực)</dd>
+                    }
+                    else
+                    {
+                        <dd>@Html.DisplayFor(m => m.Email) </dd>
+                    }
+                    <dt>Điện thoại</dt>
+                    @if (Model.PhoneNumberConfirmed)
+                    {
+                        <dd>@Html.DisplayFor(m => m.PhoneNumber) (Đã xác thực)</dd>
+                    }
+                    else
+                    {
+                        <dd>@Html.DisplayFor(m => m.PhoneNumber) </dd>
+                    }
+                    <dt>@Html.DisplayNameFor(m => m.CreateTime)</dt>
+                    <dd>@Html.DisplayFor(m => m.CreateTime)</dd>
+                    <dt>@Html.DisplayNameFor(m => m.LastUpdate)</dt>
+                    <dd>
+                        @Html.DisplayFor(m => m.LastUpdate)
+                        @if (Model.UpdateUser != null)
+                        {
+                            <span>(bởi @Model.UpdateUser)</span>
+                        }
+                    </dd>
+                </dl>
+                <hr />
+            </div>
+            <div class="col-sm-6">
+                <dl class="dl-horizontal">
+                    <dt>@Html.DisplayNameFor(m => m.Status)</dt>
+                    <dd>@Html.EnumStatusFor(m => m.Status)</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+</div>

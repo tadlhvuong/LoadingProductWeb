@@ -1,0 +1,134 @@
+﻿@using TCVShared.Helpers
+@using Newtonsoft.Json
+@using Microsoft.AspNetCore.Html
+@using TCVWeb.Areas.Admin.Models
+@model ShopItem
+@{
+    ViewBag.Icon = "fas fa-product-hunt";
+    ViewBag.Title = "Danh mục sản phẩm";
+}
+<section role="main" class="content-body">
+    <header class="page-header">
+        <h2><i class="fa @ViewBag.Icon"></i> @ViewBag.Title</h2>
+        <div class="right-wrapper pull-right">
+            <ol class="breadcrumbs">
+                <li>
+                    <a asp-action="Index" asp-controller="HomeAdmin">
+                        <i class="fa fa-home"></i>
+                    </a>
+                </li>
+                <li>
+                    <a asp-action="Index">
+                        <i class="fa fa-newspaper-o"></i>   Bài viết
+                    </a>
+                </li>
+                <li>
+                    <span>Thêm bài viết</span>
+                </li>
+            </ol>
+            <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
+        </div>
+    </header>
+    <div class="row">
+        <div class="col-sm-4">
+            <a asp-action="Index" class="btn btn-primary"><i class="fa fa-chevron-left"></i> Quay lại</a>
+        </div>
+    </div>
+    <form asp-action="CreateProduct" method="post" autocomplete="off">
+        <div class="modal-body">
+            <partial name="_PartialForm" />
+        </div>
+        <br />
+        <div class="modal-footer">
+            <span id="progress" class="text-center" style="display: none;"><img src="~/img/wait.gif" alt="waiting..." />Saving...</span>
+            <button id="btnSubmit" class="btn btn-primary" type="submit"><i class="fa fa-save"></i> Lưu lại</button>
+            <a asp-action="Index" class="btn btn-warning"><i class="fa fa-undo"></i> Hủy bỏ</a>
+        </div>
+    </form>
+</section>
+
+
+@section Scripts {
+    <script src="~/js/select2.min.js"></script>
+    <script src="~/js/select2.min_VN.js"></script>
+    <script src="~/js/summernote.min.js"></script>
+    <script src="~/js/summernote-vi-VN.js"></script>
+    <script>
+        $(document).ready(function () {
+            document.getElementById("ItemCats").selectedIndex = "-1";
+            document.getElementById("Exports").selectedIndex = "-1";
+            document.getElementById("ExportsPlace").selectedIndex = "-1";
+            document.getElementById("SizeProduct").selectedIndex = "-1";
+            $("#ItemCats").select2({
+                language: "vi",
+                theme: "bootstrap",
+                allowClear: true,
+                placeholder: "== Phân loại Sản phẩm =="
+            });
+            $("#Exports").select2({
+                language: "vi",
+                theme: "bootstrap",
+                allowClear: true,
+                placeholder: "== Nơi xuất sản phẩm =="
+            });
+            $("#ExportsPlace").select2({
+                language: "vi",
+                theme: "bootstrap",
+                allowClear: true,
+                placeholder: "== Nước bán Sản phẩm =="
+            });
+            $("#SizeProduct").select2({
+                language: "vi",
+                theme: "bootstrap",
+                allowClear: true,
+                placeholder: "== Kích thước Sản phẩm =="
+            });
+
+            $("#ItemCats, #Exports, #ExportsPlace, #SizeProduct").change(function () {
+                var idLast = parseInt(@(ViewBag.IdLast)) + 1;
+                var itemCat = $("#ItemCats").val();
+                var exportPlace = $("#ExportsPlace").val();
+                var size = $("#SizeProduct").val();
+                var exports = $("#Exports").val();
+                var stringLengthCat = 0
+                var stringLengExportPlace = 0;
+                var stringLengthSize = 0;
+                if (itemCat != null) {
+                    stringLengthCat = itemCat[0].length;
+                    if (stringLengthCat === 1) {
+                        itemCat = '00' + $("#ItemCats").val();
+                    }
+                    else if (stringLengthCat == 2) {
+                        itemCat = '0' + $("#ItemCats").val();
+                    }
+                }
+                if (exportPlace != null)
+                {
+                    stringLengExportPlace = exportPlace[0].length;
+                    if (stringLengExportPlace === 1) {
+                        exportPlace = '00' + $("#ExportsPlace").val();
+                    }
+                    else if (stringLengExportPlace == 2) {
+                        exportPlace = '0' + $("#ExportsPlace").val();
+                    }
+                }
+                if (size != null) {
+                    stringLengthSize = size[0].length;
+                    if (stringLengthSize === 1) {
+                        size = '0' + $("#SizeProduct").val();
+                    }
+                    else if (stringLengthSize == 2) {
+                        size = $("#SizeProduct").val();
+                    }
+                }
+                if ($("#ItemCats").val() != null && $("#Exports").val() != null && $("#ExportsPlace").val() != null && $("#SizeProduct").val() != null)
+                    $("#SKU").val(itemCat + exports + exportPlace + size + "001" + idLast);
+                else {
+                    $("#SKU").val('');
+                }
+            });
+        });
+
+    </script>
+}
+

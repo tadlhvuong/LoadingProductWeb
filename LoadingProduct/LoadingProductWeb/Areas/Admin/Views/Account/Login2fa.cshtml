@@ -1,0 +1,35 @@
+﻿@using TCVWeb.Areas.Admin.Models
+@model Login2faViewModel
+@{
+    ViewBag.Title = "Two-factor authentication";
+}
+<div class="panel-body">
+    <form method="post">
+        <input asp-for="ReturnUrl" type="hidden" />
+        <input asp-for="RememberMe" type="hidden" />
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="TwoFactorCode"></label>
+            <input asp-for="TwoFactorCode" class="form-control" autocomplete="off" />
+            <span asp-validation-for="TwoFactorCode" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-6">
+                <div class="checkbox-custom checkbox-default">
+                    <input id="RememberMachine" name="RememberMachine" type="checkbox" value=false />
+                    <label asp-for="RememberMachine"></label>
+                </div>
+            </div>
+            <div class="col-sm-6 text-right">
+                <button type="submit" class="btn btn-primary btn-block hidden-xs"><i class="fa fa-check"></i> Xác nhận</button>
+                <button type="submit" class="btn btn-primary btn-block btn-lg visible-xs mt-lg"><i class="fa fa-check"></i> Xác nhận</button>
+            </div>
+        </div>
+        <div class="mb-xs text-center">
+            <a class="btn btn-warning mb-md ml-xs mr-xs" asp-action="LoginCode" asp-route-returnUrl="@Model.ReturnUrl"><i class="fa fa-undo"></i> Đăng nhập với mã Cứu hộ</a>.
+        </div>
+    </form>
+</div>
+@section Scripts {
+    <partial name="_PartialValidation" />
+}

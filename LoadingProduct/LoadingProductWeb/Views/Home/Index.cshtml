@@ -1,0 +1,227 @@
+﻿@addTagHelper *,TCVShared
+@model PagedList<ShopItem>
+@{ 
+    var categories = ViewData["categories"] as String[];
+    var brands = ViewData["brands"] as Supplier[];
+}
+    <div class="body">
+        <div role="main" class="main">
+            <div class="container">
+                <div class="slider-container rev_slider_wrapper">
+                    <div id="revolutionSlider" class="slider rev_slider manual">
+                        <ul>
+                            <li data-transition="fade">
+                                <img src="~/img/banner/banner1.jpg"
+                                     alt="slide bg"
+                                     data-bgposition="center center"
+                                     data-bgfit="cover"
+                                     data-bgrepeat="no-repeat"
+                                     class="rev-slidebg">
+                                <div class="tp-caption"
+                                     data-x="center"
+                                     data-y="194"
+                                     data-start="1000"
+                                     data-whitespace="nowrap"
+                                     data-transform_in="y:[100%];s:500;"
+                                     data-transform_out="opacity:0;s:500;"
+                                     data-mask_in="x:0px;y:0px;" style="font-size: 79px; line-height:1; font-weight:800; color: #fff;">Nông sản VN</div>
+                                <div class="tp-caption"
+                                     data-x="center" data-hoffset="-220"
+                                     data-y="293"
+                                     data-start="1200"
+                                     data-transform_in="x:[-300%];opacity:0;s:500;"><img src="/img/slides/slide-title-border.png" alt="Border"></div>
+                                <div class="tp-caption"
+                                     data-x="center"
+                                     data-y="285"
+                                     data-start="1500"
+                                     data-transform_in="y:[100%];opacity:0;s:500;" style="font-size: 23px; line-height:1; font-weight:300; color: #fff;">Mua nông sản chất lượng cao.</div>
+                                <div class="tp-caption"
+                                     data-x="center" data-hoffset="220"
+                                     data-y="293"
+                                     data-start="1200"
+                                     data-transform_in="x:[300%];opacity:0;s:500;"><img src="/img/slides/slide-title-border.png" alt="Border"></div>
+                            </li>
+                            <li data-transition="fade">
+                                <img src="~/img/banner/banner4.jpg"
+                                     alt="slide bg"
+                                     data-bgposition="center center"
+                                     data-bgfit="cover"
+                                     data-bgrepeat="no-repeat"
+                                     class="rev-slidebg">
+                                <div class="tp-caption"
+                                     data-x="480"
+                                     data-y="130"
+                                     data-start="500"
+                                     data-whitespace="nowrap"
+                                     data-transform_in="y:[100%];s:500;"
+                                     data-transform_out="opacity:0;s:500;"
+                                     style="z-index: 5; font-size: 26px; font-weight:300; line-height:1.5; color: #fff;"
+                                     data-mask_in="x:0px;y:0px;">Ưu đãi đến<span style="font-weight: 600;">50%</span></div>
+                                <div class="tp-caption"
+                                     data-x="475"
+                                     data-y="164"
+                                     data-start="900"
+                                     data-whitespace="nowrap"
+                                     data-transform_in="y:[100%];s:500;"
+                                     data-transform_out="opacity:0;s:500;"
+                                     style="z-index: 5; font-size: 82px; text-transform: uppercase; font-weight:600; line-height:1;color: #fff;"
+                                     data-mask_in="x:0px;y:0px;">Huge<span style="font-weight: 800;">Sale</span></div>
+                                <div class="tp-caption tp-resizeme"
+                                     data-x="480"
+                                     data-y="256"
+                                     data-start="1300"
+                                     style="z-index: 5; font-size: 18px; font-weight: 600; line-height:1;color: #fff;"
+                                     data-transform_in="y:[100%];opacity:0;s:500;">Hạt<span style="margin-left:13px;margin-right:13px;">-</span>Rau củ tươi<span style="margin-left:13px;margin-right:13px;">-</span>Trái cây nhập khẩu<span style="margin-left:13px;margin-right:13px;">-</span>Trái cây trong nước</div>
+                                <div class="tp-caption tp-resizeme"
+                                     data-x="784"
+                                     data-y="300"
+                                     data-start="1800"
+                                     style="z-index: 5; font-size: 16px; font-weight: 300; line-height:1;"
+                                     data-transform_in="y:[100%];opacity:0;s:500;"><a href="#" class="btn btn-default" style="border:none; font-weight: 600; padding-top: 10px; padding-bottom:10px;">MUA NGAY</a></div>
+                            </li>
+                            <li data-transition="fade">
+                                <img src="~/img/banner/banner3.jpg"
+                                     alt="slide bg"
+                                     data-bgposition="center center"
+                                     data-bgfit="cover"
+                                     data-bgrepeat="no-repeat"
+                                     class="rev-slidebg">
+                                <div class="tp-caption"
+                                     data-x="170"
+                                     data-y="180"
+                                     data-start="500"
+                                     data-whitespace="nowrap"
+                                     data-transform_in="y:[100%];s:500;"
+                                     data-transform_out="opacity:0;s:500;"
+                                     style="z-index: 5; font-size: 26px; font-weight:300; line-height:1; color: #fff;"
+                                     data-mask_in="x:0px;y:0px;">Hàng đạt tiêu chuẩn cao</div>
+                                <div class="tp-caption"
+                                     data-x="170"
+                                     data-y="214"
+                                     data-start="900"
+                                     data-whitespace="nowrap"
+                                     data-transform_in="y:[100%];s:500;"
+                                     data-transform_out="opacity:0;s:500;"
+                                     style="z-index: 5; font-size: 82px; text-transform: uppercase; font-weight:600; line-height:1;color: #fff;"
+                                     data-mask_in="x:0px;y:0px;">Mua<span style="font-weight: 800;"> Ngay</span></div>
+                                <div class="tp-caption tp-resizeme"
+                                     data-x="508"
+                                     data-y="308"
+                                     data-start="1300"
+                                     style="z-index: 5; font-size: 16px; font-weight: 300; line-height:1;"
+                                     data-transform_in="y:[100%];opacity:0;s:500;"><a href="#" class="btn btn-default" style="border:none; font-weight: 600; padding-top: 10px; padding-bottom:10px;">Tìm kiếm</a></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            @*<div class="container">
+                <div class="homepage-bar">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <i class="fa fa-truck bar-icon"></i>
+                            <div class="bar-textarea">
+                                <h3>MIỄN PHÍ GIAO HÀNG & NHANH CHÓNG</h3>
+                                <p> Miễn phí giao hàng vơi tất cả đơn hàng trên 400 ngàn VNĐ.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <i class="fa fa-support bar-icon"></i>
+                            <div class="bar-textarea">
+                                <h3>MUA HÀNG DỄ DÀNG</h3>
+                                <p>Mua trực tiếp trên nền tảng thương mại điện tử.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <i class="fa fa-dollar bar-icon"></i>
+                            <div class="bar-textarea">
+                                <h3>THANH TOÁN AN TOÀN</h3>
+                                <p>Có thể  thanh toán trực tiếp khi nhận được hàng.</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>*@
+            <div class="container mb-xs" style="padding-top:20px">
+                @Html.Partial("_PartialFeaturedProduct", Model)
+
+                <div class="row" style="text-align: right">
+                    <pagination model="@Model" query-string="@Context.Request.QueryString" css-style="pagination pagination-sm"></pagination>
+                </div>
+            </div>
+            <div class="container mb-xs">
+                <h2 class="slider-title">
+                    <span class="inline-title">THƯƠNG HIỆU</span>
+                    <span class="line"></span>
+                </h2>
+                <div class="owl-carousel owl-theme manual clients-carousel">
+                    @foreach (var brand in brands)
+            {
+                <a href="#" title="@brand.Name" class="client">
+                    <img class="img-responsive" src="@brand.Address" alt="Brand" , style="object-fit: contain; width:100%; height:120px">
+                </a>
+    }
+                </div>
+            </div>
+            <div class="container mb-sm">
+                <h2 class="slider-title">
+                    <span class="inline-title">SẢN PHẨM MỚI</span>
+                    <span class="line"></span>
+                </h2>
+                <div class="owl-carousel owl-theme manual new-products-carousel hide-addtolinks">
+                    @foreach (var item in Model.Content)
+            {
+
+                <div class="product">
+                    <figure class="product-image-area">
+                        <a href="@Url.Action("Detail","Product",new { id = item.Id })" title="@item.Name" class="product-image">
+                            <img src="@item.Image" alt="Product Name" style="object-fit: cover; width:100%; height:180px">
+                        </a>
+                        <a href="#" class="product-quickview" data-toggle="modal" data-target=".quickview-modal" id="@item.Id">
+                            <i class="fa fa-share-square-o"></i>
+                            <span>Xem nhanh</span>
+                        </a>
+                        <div class="product-label"><span class="new">Mới</span></div>
+
+                    </figure>
+                    <div class="product-details-area">
+                        <h2 class="product-name"><a href="@Url.Action("Detail","Product",new { id = item.Id })" title="@item.Name">@item.Name</a></h2>
+                        <div class="product-ratings">
+                            <div class="ratings-box">
+                                <div class="rating">Mới<></div>
+                            </div>
+                        </div>
+                        <div class="product-price-box">
+                            <span class="product-price">@Convert.ToDecimal(item.CurrentPrice).ToString("#,#đ")</span>
+                        </div>
+                    </div>
+                </div>
+    }
+
+                </div>
+            </div>
+
+            <div class="modal fade quickview-modal" tabindex="-1" role="dialog" aria-labelledby="myLoginModal">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        @await Html.PartialAsync("_PartialQuickView", Model.Content[0])
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade addtocart-modal" tabindex="-1" role="dialog" aria-labelledby="myLoginModal">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        @await Html.PartialAsync("_PartialAddToCart")
+                    </div>
+                </div>
+            </div>
+
+            @*<div class="newsletter-popup mfp-hide" id="newsletter-popup-form" style="background-image: url(/img/adword/popup_sale.png)">
+            <div class="newsletter-popup-content">
+            </div><!-- End .newsletter-popup-content -->
+        </div><!-- End .newsletter-popup -->*@
+        </div>
+
+    </div>

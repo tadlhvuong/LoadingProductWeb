@@ -1,0 +1,71 @@
+﻿@using TCVShared.Helpers
+@model ShopItem
+@{
+    Layout = null;
+}
+@using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "modalForm", @autocomplete = "off" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 class="modal-title"><i class="fa fa-windows"></i> Xóa Sản phẩm</h3>
+    </div>
+    <div class="modal-body">
+        <div class="form-horizontal">
+            @Html.ValidationSummary("", new { @class = "text-danger" })
+            @Html.HiddenFor(m => m.Id)
+            <div class="row">
+                <div class="col-md-7">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Name, new { @class = "col-sm-3 control-label" })
+                        <div class="col-sm-9">
+                            @Html.DisplayFor(m => m.Name)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.SKU, new { @class = "col-sm-3 control-label" })
+                        <div class="col-sm-9">
+                            @Html.DisplayFor(m => m.SKU)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Status, new { @class = "col-sm-3 control-label" })
+                        <div class="col-sm-9">
+                            @Html.EnumDisplayFor(m => m.Status)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.RegularPrice, new { @class = "col-sm-3 control-label" })
+                        <div class="col-sm-9">
+                            @Html.DisplayFor(m => m.RegularPrice)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.SalePrice, new { @class = "col-sm-3 control-label" })
+                        <div class="col-sm-9">
+                            @Html.DisplayFor(m => m.SalePrice)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Preview, new { @class = "col-sm-3 control-label" })
+                        <div class="col-sm-9">
+                            @Html.DisplayFor(m => m.Preview)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="thumb-info mb-md">
+                        <img src="@Model.Image" id="avatar" class="rounded img-responsive" alt="">
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <div class="modal-footer">
+        <span id="progress" class="text-center" style="display: none;"><img src="/Assets/img/wait.gif" alt="waiting..." />Saving...</span>
+        <button class="btn btn-danger" type="submit"><i class="fa fa-times"></i> Xóa luôn</button>
+        <button class="btn btn-warning" data-dismiss="modal"><i class="fa fa-undo"></i> Hủy bỏ</button>
+    </div>
+}

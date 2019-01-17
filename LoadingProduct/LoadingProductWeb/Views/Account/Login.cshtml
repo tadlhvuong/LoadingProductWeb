@@ -1,0 +1,71 @@
+﻿@model LoginViewModel
+@{
+    ViewData["Title"] = "Privacy Policy";
+}
+
+<div role="main" class="main">
+    <section class="form-section">
+        <div class="container">
+            <h1 class="h2 heading-primary font-weight-normal mb-md mt-xlg">Đăng nhập</h1>
+                @if (ViewData["StatusMessage"] != null)
+            {
+                <div class="alert alert-success success-msg mb-xl" role="alert">
+                    @ViewData["StatusMessage"]
+                </div>
+            }
+
+            <div class="featured-box featured-box-primary featured-box-flat featured-box-text-left mt-md">
+                <div class="box-content">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-content">
+                                <h3 class="heading-text-color font-weight-normal">Người dùng mới</h3>
+                                <p>Tạo tài khoản trên ticivi.com bạn có thể đặt hàng nhanh hơn, lưu địa chỉ giao hàng và có thể theo dõi đơn hàng của bạn thông qua tài khoản.</p>
+                            </div>
+
+                            <div class="form-action clearfix">
+                                <a href="@Url.Action("Register", "Account")" class="btn btn-primary">Đăng ký</a>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <form asp-controller="Account" asp-action="Login" asp-route-returnurl="@ViewBag.ReturnUrl" method="post">
+                                <div class="form-content">
+                                    <h3 class="heading-text-color font-weight-normal">Đăng nhập</h3>
+                                    <p> Nếu bạn đã tạo tài khoản, hãy đăng nhập.</p>
+                                    <div class="form-group">
+                                        <label class="font-weight-normal">Email <span class="required">*</span></label>
+                                        <input type="email" asp-for="Email" class="form-control" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="font-weight-normal">Mật khẩu <span class="required">*</span></label>
+                                        <input type="password" asp-for="Password" class="form-control" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="font-weight-normal">Ghi nhớ</label>
+                                        <input asp-for="RememberMe" type="checkbox" />
+                                    </div>
+
+                                    <p class="required">* Bắt buộc</p>
+                                </div>
+
+                                <div class="form-action clearfix">
+                                    <a href="@Url.Action("ForgotPassword","Account")" class="pull-left">Quên mật khẩu?</a>
+                                    <input type="submit" class="btn btn-primary" value="Đăng nhập">
+                                </div>
+                            </form>
+
+                            <div>
+                                @await Html.PartialAsync("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>

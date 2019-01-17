@@ -1,0 +1,594 @@
+﻿@using TCVWeb.Areas.Admin.Models
+@model ShopItem
+@{
+    Layout = null;
+    var catList = (List<SelectItemModel>)ViewBag.ItemCats;
+    var exportList = (List<SelectExportModel>)ViewBag.Export;
+    var sizeList = (List<SelectItemModel>)ViewBag.SizeList;
+}
+@*<link type="text/css" href="~/css/demo.css" />
+<link type="text/css" href="~/css/croppie.css" />*@
+<style>
+    input.currency {
+        text-align: right;
+        padding-right: 15px;
+    }
+
+section {
+    margin-bottom: 25px;
+}
+
+/*button,
+a.btn {
+    background-color: #189094;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 3px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none;
+    text-shadow: none;
+    display: inline-block;
+    cursor: pointer;
+}*/
+input[type="file"] {
+    cursor: pointer;
+}
+button:focus {
+    outline: 0;
+}
+
+.file-btn {
+    position: relative;
+}
+.file-btn input[type="file"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}
+
+.actions {
+    padding: 5px 0;
+}
+.actions button {
+    margin-right: 5px;
+}
+
+.container {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+    min-width: 500px;
+    padding: 0 10px;
+}
+
+.demo-wrap {
+    border-bottom: 1px solid #ddd;
+    padding-top: 20px;
+}
+
+.demo-wrap .container {
+    padding-bottom: 10px;
+}
+
+.demo-wrap strong {
+    font-size: 16px;
+    display: block;
+    font-weight: 400;
+    color: #aaa;
+    margin: 0 0 5px 0;
+}
+
+.upload-demo .upload-demo-wrap,
+.upload-demo .upload-result,
+.upload-demo.ready .upload-msg {
+    display: none;
+}
+.upload-demo.ready .upload-demo-wrap {
+    display: block;
+}
+.upload-demo.ready .upload-result {
+    display: inline-block;
+}
+    .upload-demo-wrap {
+        width: 320px;
+        height: 320px;
+    }
+
+.upload-msg {
+    text-align: center;
+    padding: 50px;
+    font-size: 22px;
+    color: #aaa;
+    width: 260px;
+    margin: 50px;
+    border: 1px solid #aaa;
+}
+    #upload-demo, .cr-boundary {
+        height: 100%;
+    }
+    .croppie-container {
+        width: 100%;
+        height: 100%;
+    }
+
+        .croppie-container .cr-image {
+            z-index: -1;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform-origin: 0 0;
+            max-height: none;
+            max-width: none;
+        }
+
+        .croppie-container .cr-boundary {
+            position: relative;
+            overflow: hidden;
+            margin: 0 auto;
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+        }
+
+        .croppie-container .cr-viewport,
+        .croppie-container .cr-resizer {
+            position: absolute;
+            border: 2px solid #fff;
+            margin: auto;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            box-shadow: 0 0 2000px 2000px rgba(0, 0, 0, 0.5);
+            z-index: 0;
+        }
+
+        .croppie-container .cr-resizer {
+            z-index: 2;
+            box-shadow: none;
+            pointer-events: none;
+        }
+
+        .croppie-container .cr-resizer-vertical,
+        .croppie-container .cr-resizer-horisontal {
+            position: absolute;
+            pointer-events: all;
+        }
+
+            .croppie-container .cr-resizer-vertical::after,
+            .croppie-container .cr-resizer-horisontal::after {
+                display: block;
+                position: absolute;
+                box-sizing: border-box;
+                border: 1px solid black;
+                background: #fff;
+                width: 10px;
+                height: 10px;
+                content: '';
+            }
+
+        .croppie-container .cr-resizer-vertical {
+            bottom: -5px;
+            cursor: row-resize;
+            width: 100%;
+            height: 10px;
+        }
+
+            .croppie-container .cr-resizer-vertical::after {
+                left: 50%;
+                margin-left: -5px;
+            }
+
+        .croppie-container .cr-resizer-horisontal {
+            right: -5px;
+            cursor: col-resize;
+            width: 10px;
+            height: 100%;
+        }
+
+            .croppie-container .cr-resizer-horisontal::after {
+                top: 50%;
+                margin-top: -5px;
+            }
+
+        .croppie-container .cr-original-image {
+            display: none;
+        }
+
+        .croppie-container .cr-vp-circle {
+            border-radius: 50%;
+        }
+
+        .croppie-container .cr-overlay {
+            z-index: 1;
+            position: absolute;
+            cursor: move;
+            touch-action: none;
+        }
+
+        .croppie-container .cr-slider-wrap {
+            width: 75%;
+            margin: 15px auto;
+            text-align: center;
+        }
+
+    .croppie-result {
+        position: relative;
+        overflow: hidden;
+    }
+
+        .croppie-result img {
+            position: absolute;
+        }
+
+    .croppie-container .cr-image,
+    .croppie-container .cr-overlay,
+    .croppie-container .cr-viewport {
+        -webkit-transform: translateZ(0);
+        -moz-transform: translateZ(0);
+        -ms-transform: translateZ(0);
+        transform: translateZ(0);
+    }
+    .cr-slider {
+        -webkit-appearance: none;
+        /*removes default webkit styles*/
+        /*border: 1px solid white; */ /*fix for FF unable to apply focus style bug */
+        width: 300px;
+        /*required for proper track sizing in FF*/
+        max-width: 100%;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        background-color: transparent;
+    }
+
+        .cr-slider::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 3px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 0;
+            border-radius: 3px;
+        }
+
+        .cr-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            border: none;
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            background: #ddd;
+            margin-top: -6px;
+        }
+
+        .cr-slider:focus {
+            outline: none;
+        }
+
+        .cr-slider::-moz-range-track {
+            width: 100%;
+            height: 3px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 0;
+            border-radius: 3px;
+        }
+
+        .cr-slider::-moz-range-thumb {
+            border: none;
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            background: #ddd;
+            margin-top: -6px;
+        }
+
+        /*hide the outline behind the border*/
+        .cr-slider:-moz-focusring {
+            outline: 1px solid white;
+            outline-offset: -1px;
+        }
+
+        .cr-slider::-ms-track {
+            width: 100%;
+            height: 5px;
+            background: transparent;
+            /*remove bg colour from the track, we'll use ms-fill-lower and ms-fill-upper instead */
+            border-color: transparent; /*leave room for the larger thumb to overflow with a transparent border */
+            border-width: 6px 0;
+            color: transparent; /*remove default tick marks*/
+        }
+
+        .cr-slider::-ms-fill-lower {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+        }
+
+        .cr-slider::-ms-fill-upper {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+        }
+
+        .cr-slider::-ms-thumb {
+            border: none;
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            background: #ddd;
+            margin-top: 1px;
+        }
+
+        .cr-slider:focus::-ms-fill-lower {
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .cr-slider:focus::-ms-fill-upper {
+            background: rgba(0, 0, 0, 0.5);
+        }
+    .cr-rotate-controls {
+        position: absolute;
+        bottom: 5px;
+        left: 5px;
+        z-index: 1;
+    }
+
+        .cr-rotate-controls button {
+            border: 0;
+            background: none;
+        }
+
+        .cr-rotate-controls i:before {
+            display: inline-block;
+            font-style: normal;
+            font-weight: 900;
+            font-size: 22px;
+        }
+
+    .cr-rotate-l i:before {
+        content: '↺';
+    }
+
+    .cr-rotate-r i:before {
+        content: '↻';
+    }
+</style>
+<div class="form-horizontal">
+    @Html.HiddenFor(m => m.Id)
+    @Html.HiddenFor(m => m.CreateTime)
+    @Html.HiddenFor(m => m.Status)
+
+    <div class="row">
+        <p>Vui lòng chọn phân loại, nơi xuất hàng, nước xuất hàng, kích thước để tạo mã hàng.</p>
+        <p style="color: red;">Vui lòng chọn nhập đầy đủ trường đánh dấu '*'.</p>
+        <div class="col-md-7">
+            <div class="form-group">
+                <label asp-for="SKU" class="col-sm-3 control-label"></label><span style="color:red;">*</span>
+                <div class="col-sm-9">
+                    <input asp-for="SKU" id="SKU" class="form-control" , required="" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="col-sm-3 control-label"></label><span style="color:red;">*</span>
+                <div class="col-sm-9">
+                    <input asp-for="Name" class="form-control" , required="" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="NameEn" class="col-sm-3 control-label"></label>
+                <div class="col-sm-9">
+                    <input asp-for="NameEn" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="ItemCats" class="col-sm-3 control-label"></label><span style="color:red;">*</span>
+                <div class="col-sm-9">
+                    <select id="ItemCats" name="ItemCats" class="form-control" , required>
+                        @if (catList != null)
+                        {
+                            @foreach (var item in catList)
+                            {
+                                if (item.selected)
+                                {
+                                    <option value="@item.id" selected>@item.text</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.id">@item.text</option>
+                                }
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Exports" class="col-sm-3 control-label"></label><span style="color:red;">*</span>
+                <div class="col-sm-9">
+                    <select id="Exports" name="Exports" class="form-control" , required>
+                        @if (exportList != null)
+                        {
+                            @foreach (var item in exportList)
+                            {
+                                if (item.selectedParent)
+                                {
+                                    <option value="@item.parentId" selected>@item.parentText</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.parentId">@item.parentText</option>
+                                }
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ExportsPlace" class="col-sm-3 control-label"></label><span style="color:red;">*</span>
+                <div class="col-sm-9">
+                    <select id="ExportsPlace" name="ExportsPlace" class="form-control" , required>
+                        @if (exportList != null)
+                        {
+                            @foreach (var item in exportList)
+                            {
+                                if (item.selected)
+                                {
+                                    <option value="@item.id" selected>@item.text</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.id">@item.text</option>
+                                }
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="SizeProduct" class="col-sm-3 control-label"></label><span style="color:red;">*</span>
+                <div class="col-sm-9">
+                    <select id="SizeProduct" name="SizeProduct" class="form-control" , required>
+                        @if (exportList != null)
+                        {
+                            @foreach (var item in sizeList)
+                            {
+                                if (item.selected)
+                                {
+                                    <option value="@item.id" selected>@item.text</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.id">@item.text</option>
+                                }
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="RegularPrice" class="col-sm-3 control-label"></label><span style="color:red;">*</span>
+                <div class="col-sm-9" style="">
+                    <input id="regularPrice" asp-for="RegularPrice" asp-format="{0:#,#}" class="form-control" type="text" placeholder="Giá theo VNĐ" , required="" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="RegularPriceEn" class="col-sm-3 control-label"></label>
+                <div class="col-sm-9">
+                    <input asp-for="RegularPriceEn" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="SalePrice" class="col-sm-3 control-label"></label><span style="color:red;">*</span>
+                <div class="col-sm-9">
+                    <input id="salePrice" asp-for="SalePrice" asp-format="{0:#,#}" class="form-control" placeholder="Giá theo VNĐ" , required="" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="SalePriceEn" class="col-sm-3 control-label"></label>
+                <div class="col-sm-9">
+                    <input asp-for="SalePriceEn" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="ItemTags" class="col-sm-3 control-label"></label>
+                <div class="col-sm-9">
+                    <input asp-for="ItemTags" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Preview" class="col-sm-3 control-label"></label><span style="color:red;">*</span>
+                <div class="col-sm-9">
+                    <textarea asp-for="Preview" class="form-control" rows="3" , required=""></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="PreviewEn" class="col-sm-3 control-label"></label>
+                <div class="col-sm-9">
+                    <textarea asp-for="PreviewEn" class="form-control" rows="3"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Status" class="col-sm-3 control-label"></label>
+                <div class="col-sm-9">
+                    <select asp-for="Status" asp-items="@Html.GetEnumSelectList(Model.Status.GetType())" class="form-control"></select>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <label asp-for="Image" class="col-md-4 control-label" style="font-size: 25px;"></label>
+        <br />
+
+        <div class="col-md-5">
+            <div class="demo-wrap upload-demo">
+                <div class="">
+                    <div class="actions" style="text-align: center;">
+                        <a class="btn file-btn  btn-primary">
+                            <span>Chọn ảnh...</span>
+                            <input type="file" id="uploadFile" name="uploadFile" value="Choose a file" accept="image/*" />
+                        </a>
+                        <button class="upload-result btn btn-primary" type="button">Cắt ảnh</button>
+
+                    </div>
+                    <div class="upload-msg">
+                        Upload a file to start cropping
+                    </div>
+                    <div class="upload-demo-wrap">
+                        <div id="upload-demo"></div>
+                    </div>
+                    <br />
+                    <div class="thumb-info mb-md">
+                        <h3>Kết quả</h3>
+                        @Html.HiddenFor(m => m.Image)
+                        <img src="@Model.Image" id="avatar" class="rounded img-responsive" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <hr />
+    <h1>Nội dung</h1>
+    <div class="form-group">
+        <div class="col-md-12">
+            @Html.SummerNoteFor(m => m.Content)
+        </div>
+    </div>
+
+    <h1>Nội dung English</h1>
+    <div class="form-group">
+        <div class="col-md-12">
+            @Html.SummerNoteFor(m => m.ContentEn)
+        </div>
+    </div>
+</div>
+
+<script src="~/js/croppie.js"></script>
+<script src="~/js/demo.js"></script>
+
+<script>
+    Demo.init();
+    //$(document).ready(function () {
+    //    var img = Demo.getUrlImageNew();
+    //    console.log(img);
+    //});
+    document.getElementById("regularPrice").onblur = function () {
+        this.value = parseFloat(this.value.replace(/,/g, ""))
+            .toString()
+            .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        if (this.value == "NaN")
+            this.value = 0;
+    }
+    document.getElementById("salePrice").onblur = function () {
+        this.value = parseFloat(this.value.replace(/,/g, ""))
+            .toString()
+            .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        if (this.value == "NaN")
+            this.value = 0;
+    }
+    document.getElementById("SKU").readOnly = true;
+    document.getElementById("SKU").style.color = "#c0c0c0";
+
+</script>

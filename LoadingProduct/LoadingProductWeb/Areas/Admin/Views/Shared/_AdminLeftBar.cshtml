@@ -1,0 +1,122 @@
+﻿@using TCVShared.Helpers
+<aside id="sidebar-left" class="sidebar-left">
+    <div class="sidebar-header">
+        <div class="sidebar-title">
+            Navigation
+        </div>
+        <div class="sidebar-toggle hidden-xs" data-toggle-class="sidebar-left-collapsed" data-target="html" data-fire-event="sidebar-left-toggle">
+            <i class="fa fa-bars"></i>
+        </div>
+    </div>
+    <div class="nano">
+        <div class="nano-content">
+            <nav id="menu" class="nav-main" role="navigation">
+                <ul class="nav nav-main">
+                    <li class="@(Html.IsActive("HomeAdmin") ? "nav-active" : "")">
+                        <a href="@Url.Action("Index", "HomeAdmin")"><i class="fa fa-home"></i> <span>Dashboard</span></a>
+                    </li>
+                    @if (User.IsInRole("Manager"))
+                    {
+                        <li class="@(Html.IsActive("Member") ? "nav-parent nav-expanded nav-active" : "nav-parent")">
+                            <a href="#"><i class="fa fa-users"></i> <span>Thành Viên</span></a>
+                            <ul class="nav nav-children">
+                                <li class="@(Html.IsActive("Member", "Index") ? "nav-active" : "")">
+                                    <a href="@Url.Action("Index", "Member")"><i class="fa fa-tasks"></i> Danh sách</a>
+                                </li>
+                                <li class="@(Html.IsActive("Member", "Search") ? "nav-active" : "")">
+                                    <a href="@Url.Action("Search", "Member")"><i class="fa fa-search"></i> Tìm kiếm</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="@(Html.IsActive("Media") ? "nav-parent nav-expanded nav-active" : "nav-parent")">
+                            <a href="#"><i class="fa fa-image"></i> <span>Thư viện</span></a>
+                            <ul class="nav nav-children">
+                                <li class="@(Html.IsActive("Media", "General") ? "nav-active" : "")">
+                                    <a href="@Url.Action("FileManager", "Media")"><i class="fa fa-image"></i> Hình ảnh</a>
+                                </li>
+                            </ul>
+                        </li>
+                    }
+                    @if (User.IsInRole("Operator") || User.IsInRole("Manager"))
+                    {
+                        <li class="@(Html.IsActive("BlogPost") ? "nav-parent nav-expanded nav-active" : "nav-parent")">
+                            <a href="#"><i class="fa fa-newspaper-o"></i> <span>Trang tin</span></a>
+                            <ul class="nav nav-children">
+                                <li class="@(Html.IsActive("BlogPost", "Index") ? "nav-active" : "")">
+                                    <a href="@Url.Action("Index", "BlogPost")"><i class="fa fa-newspaper-o"></i> Bài viết</a>
+                                </li>
+                                <li class="@(Html.IsActive("BlogPost", "PostCatList") ? "nav-active" : "")">
+                                    <a href="@Url.Action("PostCatList", "BlogPost")"><i class="fa fa-cubes"></i> Phân loại</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="@(Html.IsActive("Product") ? "nav-parent nav-expanded nav-active" : "nav-parent")">
+                            <a href="#"><i class="fa fa-cubes"></i> <span>Sản phẩm</span></a>
+                            <ul class="nav nav-children">
+                                <li class="@(Html.IsActive("Product", "Index") ? "nav-active" : "")">
+                                    <a href="@Url.Action("Index", "Product")"><i class="fa fa-tasks"></i> Danh sách</a>
+                                </li>
+                                <li class="@(Html.IsActive("Product", "CreateProduct") ? "nav-active" : "")">
+                                    <a href="@Url.Action("CreateProduct", "Product")"><i class="fa fa-plus"></i> Thêm mới</a>
+                                </li>
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <li class="@(Html.IsActive("Product", "ItemCatList") ? "nav-active" : "")">
+                                        <a href="@Url.Action("ItemCatList", "Product")"><i class="fa fa-cubes"></i> Phân loại</a>
+                                    </li>
+                                    <li class="@(Html.IsActive("Product", "ItemAttrList") ? "nav-active" : "")">
+                                        <a href="@Url.Action("ItemAttrList", "Product")"><i class="fa fa-sliders"></i> Thuộc tính</a>
+                                    </li>
+                                    <li class="@(Html.IsActive("Product", "ExportList") ? "nav-active" : "")">
+                                        <a href="@Url.Action("ExportList", "Product")"><i class="fa fa-cubes"></i> Nơi xuất hàng</a>
+                                    </li>
+                                    <li class="@(Html.IsActive("Product", "SizeProductList") ? "nav-active" : "")">
+                                        <a href="@Url.Action("SizeProductList", "Product")"><i class="fa fa-cubes"></i> Kích thước</a>
+                                    </li>
+                                }
+                                @if (User.IsInRole("Manager"))
+                                {
+                                    <li class="@(Html.IsActive("Product", "Orders") ? "nav-active" : "")">
+                                        <a href="@Url.Action("Orders", "Product")"><i class="fa fa-shopping-cart"></i> Đơn hàng</a>
+                                    </li>
+                                }
+                            </ul>
+                        </li>
+                    }
+                    @*@if (User.IsInRole("Admin"))
+        {
+            <li class="@(Html.IsActive("Settings") ? "nav-parent nav-expanded nav-active" : "nav-parent")">
+                <a href="#"><i class="fa fa-cogs"></i> <span>Settings</span></a>
+                <ul class="nav nav-children">
+                    <li class="@(Html.IsActive("Settings", "BanksList") ? "nav-active" : "")">
+                        <a href="@Url.Action("BanksList", "Settings")"><i class="fa fa-bank"></i> Bank Accounts</a>
+                    </li>
+                    <li class="@(Html.IsActive("Settings", "CardsList") ? "nav-active" : "")">
+                        <a href="@Url.Action("CardsList", "Settings")"><i class="fa fa-credit-card"></i> Card Types</a>
+                    </li>
+                    <li class="@(Html.IsActive("Settings", "Email") ? "nav-active" : "")">
+                        <a href="@Url.Action("Email", "Settings")"><i class="fa fa-envelope"></i> Email Settings</a>
+                    </li>
+                    <li class="@(Html.IsActive("Settings", "Phone") ? "nav-active" : "")">
+                        <a href="@Url.Action("Phone", "Settings")"><i class="fa fa-phone"></i> SMS Settings</a>
+                    </li>
+                    <li class="@(Html.IsActive("Settings", "Exchange") ? "nav-active" : "")">
+                        <a href="@Url.Action("Exchange", "Settings")"><i class="fa fa-usd"></i> Exchange Settings</a>
+                    </li>
+                </ul>
+            </li>
+        }*@
+                </ul>
+            </nav>
+        </div>
+        <script>
+            if (typeof localStorage !== 'undefined') {
+                if (localStorage.getItem('sidebar-left-position') !== null) {
+                    var initialPosition = localStorage.getItem('sidebar-left-position'),
+                        sidebarLeft = document.querySelector('#sidebar-left .nano-content');
+                    sidebarLeft.scrollTop = initialPosition;
+                }
+            }
+        </script>
+    </div>
+</aside>

@@ -1,0 +1,113 @@
+﻿@addTagHelper *,TCVShared
+@model PagedList<BlogPost>
+@{
+    ViewBag.Icon = "fas fa-archive";
+    ViewBag.Title = "Bài Viết";
+}
+
+<div role="main" class="main">
+    <section class="page-header">
+        <div class="container">
+            <ul class="breadcrumb">
+                <li><a href="#">Trang chủ</a></li>
+
+                <li class="active">Bài viết</li>
+            </ul>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="toolbar">
+                    <div class="sorter">
+                        <div class="sort-by">
+                            <label>Sắp theo:</label>
+                            <select>
+                                <option value="Created At">Ngày tạo</option>
+                                <option value="Added By">Tác giả</option>
+                            </select>
+                            <a href="#" title="Set Desc Direction">
+                                <img src="../img/demos/shop/i_desc_arrow.gif" alt="Set Desc Direction">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="blog-posts">
+                    @foreach (var item in Model.Content)
+                    {
+                        <article class="post post-large">
+                            @if (item.Format == PostFormat.Gallery)
+                            {
+                                @*foreach (var mediaFile in item.MediaAlbum.MediaFiles)
+                                {*@
+                                    <div class="post-image">
+                                        <div class="owl-carousel owl-theme" data-plugin-options="{'items':1}">
+                                            <div>
+                                                <div class="img-thumbnail">
+                                                    <img class="img-responsive" src="@item.Image" alt="Post" style="width:1280px; height: 400px; object-fit:fill; object-position:center">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                @*}*@
+                            }
+                            else if (item.Format == PostFormat.Video)
+                            {
+                                    <div class="post-video">
+                                        @Html.Raw(item.ExtLink)
+                                    </div>
+                            }
+
+                            <div class="post-date">
+                                <span class="day">@item.CreateTime.Value.Day.ToString()</span>
+                                <span class="month">Tháng @item.CreateTime.Value.Month.ToString()</span>
+                            </div>
+
+                            <div class="post-content">
+                                <h2><a href="@Url.Action("Details","BlogPost",new { id = item.Id })">@Html.DisplayFor(m => item.Title)</a></h2>
+                                <p>@Html.DisplayFor(m => item.Preview)</p>
+
+                                <a href="@Url.Action("Details","BlogPost",new { id = item.Id })" class="btn btn-xs btn-link">Đọc tiếp</a>
+
+                                <div class="post-meta">
+                                    <span><i class="fa fa-calendar"></i>@Html.DisplayFor(m => item.CreateTime) </span>
+                                    <span><i class="fa fa-user"></i> By <a href="#">@Html.DisplayFor(m => item.CreateUser)</a> </span>
+                                    <span><i class="fa fa-tag"></i> <a href="#">News</a> </span>
+                                </div>
+                            </div>
+                        </article>
+                    }
+                </div>
+
+                <div class="toolbar">
+                    <div class="sorter">
+                        <div class="sort-by">
+                            <label>Sắp theo:</label>
+                            <select>
+                                <option value="Created At">Ngày tạo</option>
+                                <option value="Added By">Tác giả</option>
+                            </select>
+                            <a href="#" title="Set Desc Direction">
+                                <img src="../img/demos/shop/i_desc_arrow.gif" alt="Set Desc Direction">
+                            </a>
+                        </div>
+
+                        <ul class="pagination">
+                            <pagination model="@Model" query-string="@Context.Request.QueryString" css-style="pagination pagination-sm"></pagination>
+                        </ul>
+                       
+                    </div>
+                </div>
+            </div>
+
+            <partial name="_PartialRightBlog" />
+
+        </div>
+    </div>
+
+</div>
+

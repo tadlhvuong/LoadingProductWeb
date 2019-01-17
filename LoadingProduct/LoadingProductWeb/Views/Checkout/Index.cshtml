@@ -1,0 +1,209 @@
+﻿@model ShopOrder
+@{
+    bool isAuthenticated = this.User.Identity.IsAuthenticated;
+}
+<div role="main" class="main">
+    <div class="checkout">
+        <div class="container">
+            <h1 class="h2 heading-primary mt-lg mb-md clearfix">
+                Đặt hàng
+            </h1>
+         @if (!isAuthenticated)
+         {
+            <div class="checkout-menu clearfix">
+                <a href="#" class="btn btn-primary pull-left mb-sm" data-toggle="modal" data-target=".shop-login-modal">ĐĂNG NHẬP</a>                
+                <div class="dropdown pull-right checkout-review-dropdown">
+                    <button class="btn btn-primary mb-sm" id="reviewTable" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-shopping-cart"></i>
+                        @Model.GrandTotalPrice
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="reviewTable">
+                        <h3>Xem lại đơn hàng</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Tên sản phẩm</th>
+                                    <th class="text-center">Số lượng</th>
+                                    <th class="text-right">Thành tiền</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Items)
+                                {
+                                    <tr>
+                                        <td>@item.ShopItem.Name</td>
+                                        <td class="text-center">@item.Quantity</td>
+                                        <td class="text-right">@item.ShopItem.CurrentPrice</td>
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td class="text-right" colspan="2">Thành tiền</td>
+                                    <td class="text-right">@Model.GrandTotalPrice</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+         }
+
+            <form asp-controller="Checkout" asp-action="PlaceOrder" method="post">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-col">
+                            <h3>Thông tin người mua</h3>
+                            @*<div class="row">
+                                <div class="col-xs-6 col-md-6">
+                                    <div class="form-group">
+                                        <label>First Name<span class="required">*</span></label>
+                                        @if (isAuthenticated)
+                                        {
+                                        <input type="text" class="form-control" value="@Model.AppUser.Email" required>
+                                        }
+                                        else {
+                                        <input type="text" class="form-control" required>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-md-6">
+                                    <div class="form-group">
+                                        <label>Middle Name/Initial</label>
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </div>
+                            </div>*@
+                            <div class="row">
+                                <div class="col-xs-12 col-md-12">
+                                    <div class="form-group">
+                                        <label>Họ và tên</label>
+                                        <input asp-for="AppUser.UserName" type="text" class="form-control" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-md-12">
+                                    <div class="form-group wide">
+                                        <label asp-for="AppUser.Email"></label>
+                                        <input asp-for="AppUser.Email" type="email" class="form-control" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-12 col-md-12">
+                                    <div class="form-group">
+                                        <label asp-for="ShippingAddress.Phone"></label>
+                                        <input asp-for="ShippingAddress.Phone" type="text" class="form-control" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-col">
+                            <h3>Địa chỉ giao hàng</h3>
+                            <div class="form-group">
+                                <label asp-for="ShippingAddress.City"></label>
+                                <input type="text" asp-for="ShippingAddress.City" class="form-control" required>
+
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="ShippingAddress.State"></label>
+                                <input type="text" asp-for="ShippingAddress.State" class="form-control" required>
+                            </div>
+                           
+                            <div class="form-group">
+                                <label asp-for="ShippingAddress.Address"></label>
+                                <input type="text" asp-for="ShippingAddress.Address" class="form-control" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-col">
+                            <h3>Phương thức thanh toán</h3>
+                            <div class="checkout-payment-method">
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" value="checkmo" name="payment[method]" checked="checked" class="payment-card-check">
+                                        Tiền mặt
+                                    </label>
+                                </div>
+                                @*<div class="radio">
+                                    <label>
+                                        <input type="radio" value="checkcard" name="payment[method]" class="payment-card-check">
+                                        Credit Card (saved)
+                                    </label>
+                                </div>
+                                <div id="payment-credit-card-area">
+                                    <div class="form-group wide mb-md">
+                                        <label>Name on Card<span class="required">*</span></label>
+                                        <input type="text" class="form-control" required>
+                                    </div>
+                                    <div class="form-group wide mb-md">
+                                        <label>Credit Card Type<span class="required">*</span></label>
+                                        <select class="form-control">
+                                            <option value="&nbsp;">--Please Select--</option>
+                                            <option value="AE">American Express</option>
+                                            <option value="VI">Visa</option>
+                                            <option value="MC">MasterCard</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group wide mb-md">
+                                        <label>Credit Card number<span class="required">*</span></label>
+                                        <input type="text" class="form-control" required>
+                                    </div>
+                                    <div class="form-group wide mb-md">
+                                        <label>Credit Card Type<span class="required">*</span></label>
+                                        <div class="clearfix">
+                                            <select class="form-control pull-left">
+                                                <option value="&nbsp;">Month</option>
+                                                <option value="1">01 - January</option>
+                                                <option value="2">02 - February</option>
+                                                <option value="3">03 - March</option>
+                                                <option value="4">04 - April</option>
+                                                <option value="5">05 - May</option>
+                                                <option value="6">06 - June</option>
+                                                <option value="7">07 - July</option>
+                                                <option value="8">08 - August</option>
+                                                <option value="9">09 - September</option>
+                                                <option value="10">10 - October</option>
+                                                <option value="11">11 - November</option>
+                                                <option value="12">12 - December</option>
+                                            </select>
+                                            <select class="form-control pull-left ml-md">
+                                                <option value="&nbsp;">Year</option>
+                                                <option value="2017">2017</option>
+                                                <option value="2018">2018</option>
+                                                <option value="2019">2019</option>
+                                                <option value="2020">2020</option>
+                                                <option value="2021">2021</option>
+                                                <option value="2022">2022</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-lg">
+                                        <label>Card Verification Number<span class="required">*</span></label>
+                                        <input type="text" class="form-control" required>
+                                    </div>
+                                </div>*@
+                            </div>
+
+                            <div class="checkout-review-action" id="partial-total" style="padding-top: 10px">
+                                @await Html.PartialAsync("_PartialTotal", Model)
+                            </div>
+
+                            <input type="submit" class="btn btn-primary" value="Đặt hàng">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        @await Html.PartialAsync("_PartialLoginView", new LoginViewModel())
+
+        @await Html.PartialAsync("_PartialForgetPassword", new ForgotPasswordViewModel())
+
+    </div>
+</div>
