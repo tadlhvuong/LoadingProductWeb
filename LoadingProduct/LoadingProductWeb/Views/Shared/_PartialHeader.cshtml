@@ -8,9 +8,9 @@
             <div class="header-row">
                 <div class="header-column">
                     <div class="header-logo">
-                        <img class="logo-default" alt="Porto" width="324" height="212" src="img/demos/construction/logo-construction.png">
-                        <a href="demo-construction.html">
-                            <img class="logo-small" alt="Porto" width="131" height="48" src="img/demos/construction/logo-construction-small.png">
+                        <img class="logo-default" alt="Porto" width="324" height="212" src="~/img/demos/construction/logo-construction.png">
+                        <a href="@Url.Action("Index")">
+                            <img class="logo-small" alt="Porto" width="131" height="48" src="~/img/demos/construction/logo-construction-small.png">
                         </a>
                     </div>
                 </div>
@@ -22,37 +22,37 @@
                             </button>
                             <ul class="header-social-icons social-icons visible-lg">
                                 <li class="social-icons-facebook"><a href="http://www.facebook.com/" target="_blank" title="Facebook"><i class="fa fa-facebook"></i></a></li>
-                                <li class="social-icons-twitter"><a href="http://www.twitter.com/" target="_blank" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                                @*<li class="social-icons-twitter"><a href="http://www.twitter.com/" target="_blank" title="Twitter"><i class="fa fa-twitter"></i></a></li>*@
                             </ul>
                             <div class="header-nav-main header-nav-main-square header-nav-main-effect-2 header-nav-main-sub-effect-1 collapse">
                                 <nav>
                                     <ul class="nav nav-pills" id="mainNav">
                                         <li class="active">
                                             <a href="@Url.Action("Index")">
-                                                Home
+                                                Trang chủ
                                             </a>
                                         </li>
                                         <li>
                                             <a href="@Url.Action("About")">
-                                                Company
+                                                Giới thiệu
                                             </a>
                                         </li>
                                         <li class="dropdown">
                                             <a class="dropdown-toggle" href="@Url.Action("Service")">
-                                                Services
+                                                Dịch vụ
                                             </a>
                                             <ul class="dropdown-menu">
-                                                <li><a href="@Url.Action("DetailsService")">Pre-Construction</a></li>
-                                                <li><a href="@Url.Action("DetailsService")">General Construction</a></li>
-                                                <li><a href="@Url.Action("DetailsService")">Plumbing</a></li>
-                                                <li><a href="@Url.Action("DetailsService")">Painting</a></li>
+                                                <li><a href="@Url.Action("DetailsService")">Bốc xếp</a></li>
+                                                <li><a href="@Url.Action("DetailsService")">Chuyển nhà - Văn phòng</a></li>
+                                                <li><a href="@Url.Action("DetailsService")">Cho thuê nhân công</a></li>
+                                                <li><a href="@Url.Action("DetailsService")">Cho thuê xe nâng cẩu</a></li>
                                             </ul>
                                         </li>
-                                        <li>
+                                        @*<li>
                                             <a href="@Url.Action("Portfolio")">
                                                 Portfolio
                                             </a>
-                                        </li>
+                                        </li>*@
                                         @*<li>
                                             <a href="demo-construction-blog.html">
                                                 Blog
@@ -60,7 +60,7 @@
                                         </li>*@
                                         <li>
                                             <a href="@Url.Action("Contact")">
-                                                Contact
+                                                Liên hệ
                                             </a>
                                         </li>
                                     </ul>
