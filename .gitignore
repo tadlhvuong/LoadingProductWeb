@@ -20,6 +20,6 @@ bld/
 [Ll]og/
 
 # Visual Studio 2015/2017 cache/options directory
-TCV/.vs/
-/TCV/TCVWeb/.vs
-/TCV/TCVWeb/wwwroot/media
+LoadingProduct/.vs/
+/LoadingProduct/LoadingProductWeb/.vs
+/LoadingProduct/LoadingProductWeb/wwwroot/media
