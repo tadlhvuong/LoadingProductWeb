@@ -8,7 +8,7 @@
         <div class="container">
             <div class="row mt-xl">
                 <div class="col-md-10 col-md-offset-2 pt-xlg mt-xlg align-right">
-                    <h1 class="text-uppercase font-weight-light mt-xl text-color-primary">Services</h1>
+                    <h1 class="text-uppercase font-weight-light mt-xl text-color-primary">Dịch vụ</h1>
                 </div>
             </div>
         </div>
@@ -19,65 +19,20 @@
         <div class="row pt-sm mb-xl">
             <div class="col-md-3">
                 <aside class="sidebar">
-
                     <ul class="nav nav-list mb-xl show-bg-active">
-                        <li><a href="@Url.Action("Service")">Overview</a></li>
-                        <li><a href="@Url.Action("DetailsService")">Pre-Construction</a></li>
-                        <li class="active"><a href="@Url.Action("DetailsService")">General Construction</a></li>
-                        <li><a href="@Url.Action("DetailsService")">Plumbing</a></li>
-                        <li><a href="@Url.Action("DetailsService")">Painting</a></li>
+                        <li><a href="@Url.Action("Service")">Tổng quan</a></li>
+                        <li><a href="@Url.Action("DetailsService")">Bốc xếp</a></li>
+                        <li class="active"><a href="@Url.Action("DetailsService")">Chuyển nhà & văn phòng</a></li>
+                        <li><a href="@Url.Action("DetailsService")">Cho thuê nhân công</a></li>
+                        <li><a href="@Url.Action("DetailsService")">Cho thuê xe nâng cẩu</a></li>
                     </ul>
-
-                    <h4 class="pt-xl mb-md text-color-dark">Contact Us</h4>
-                    <p>Contact us or give us a call to discover how we can help.</p>
-
-                    <form id="contactForm" action="php/contact-form.php" method="POST" class="mb-xlg">
-                        <div class="row">
-                            <div class="form-group">
-                                <div class="col-md-12">
-                                    <label>Your name *</label>
-                                    <input type="text" value="" data-msg-required="Please enter your name." maxlength="100" class="form-control" name="name" id="name" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group">
-                                <div class="col-md-12">
-                                    <label>Your email address *</label>
-                                    <input type="email" value="" data-msg-required="Please enter your email address." data-msg-email="Please enter a valid email address." maxlength="100" class="form-control" name="email" id="email" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group">
-                                <div class="col-md-12">
-                                    <label>Subject</label>
-                                    <input type="text" value="" data-msg-required="Please enter the subject." maxlength="100" class="form-control" name="subject" id="subject" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group">
-                                <div class="col-md-12">
-                                    <label>Message *</label>
-                                    <textarea maxlength="5000" data-msg-required="Please enter your message." rows="3" class="form-control" name="message" id="message" required></textarea>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <input type="submit" value="Send Message" class="btn btn-primary mb-xl" data-loading-text="Loading...">
-
-                                <div class="alert alert-success hidden" id="contactSuccess">
-                                    Message has been sent to us.
-                                </div>
-
-                                <div class="alert alert-danger hidden" id="contactError">
-                                    Error sending your message.
-                                </div>
-                            </div>
-                        </div>
-                    </form>
+                    <h4 class="pt-xl mb-md text-color-dark">Liên hệ</h4>
+                    <p>Liên hệ với chúng tôi hoặc gọi cho chúng tôi để nhận được sự giúp đỡ.</p>
+                    <ul class="list list-icons mt-xlg mb-xlg">
+                        <li><i class="icon-pin icons"></i> <strong>Địa chỉ:</strong> 1234 Street Name, City Name</li>
+                        <li><i class="icon-call-end icons"></i> <strong>Điện thoại:</strong> (123) 456-789</li>
+                        <li><i class="icon-envelope icons"></i> <strong>Email:</strong> <a href="mailto:mail@example.com">mail@example.com</a></li>
+                    </ul>
 
                 </aside>
 
