@@ -29,6 +29,17 @@
     <Content Remove="wwwroot\img\icons\chuyenvp.png" />
     <Content Remove="wwwroot\img\icons\thuenhancong.jpg" />
     <Content Remove="wwwroot\img\icons\thuexe.png" />
+    <Content Remove="wwwroot\img\office\1.jpg" />
+    <Content Remove="wwwroot\img\office\2.jpg" />
+    <Content Remove="wwwroot\img\office\3.jpg" />
+    <Content Remove="wwwroot\img\office\4.jpg" />
+    <Content Remove="wwwroot\img\office\5.jpg" />
+    <Content Remove="wwwroot\img\office\6.jpg" />
+    <Content Remove="wwwroot\img\office\7.jpg" />
+    <Content Remove="wwwroot\img\banner\banner3.jpg" />
+    <Content Remove="wwwroot\img\banner\banner4.jpg" />
+    <Content Remove="wwwroot\img\banner\banner5.jpg" />
+    <Content Remove="wwwroot\img\banner\banner6.jpg" />
   </ItemGroup>
   <ItemGroup>
     <None Include="wwwroot\img\demos\construction\logoAT.png" />
@@ -47,6 +58,17 @@
     <None Include="wwwroot\img\icons\chuyenvp.png" />
     <None Include="wwwroot\img\icons\thuenhancong.jpg" />
     <None Include="wwwroot\img\icons\thuexe.png" />
+    <None Include="wwwroot\img\office\1.jpg" />
+    <None Include="wwwroot\img\office\2.jpg" />
+    <None Include="wwwroot\img\office\3.jpg" />
+    <None Include="wwwroot\img\office\4.jpg" />
+    <None Include="wwwroot\img\office\5.jpg" />
+    <None Include="wwwroot\img\office\6.jpg" />
+    <None Include="wwwroot\img\office\7.jpg" />
+    <None Include="wwwroot\img\banner\banner3.jpg" />
+    <None Include="wwwroot\img\banner\banner4.jpg" />
+    <None Include="wwwroot\img\banner\banner5.jpg" />
+    <None Include="wwwroot\img\banner\banner6.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="wwwroot\img\banner\" />
