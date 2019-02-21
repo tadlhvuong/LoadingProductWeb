@@ -19,18 +19,18 @@
             <div class="col-md-3">
                 <aside class="sidebar">
                     <ul class="nav nav-list mb-xl show-bg-active">
-                        <li><a href="@Url.Action("Service")">Tổng quan</a></li>
-                        <li><a href="@Url.Action("DetailsService")">Bốc xếp</a></li>
-                        <li class="active"><a href="@Url.Action("DetailsService")">Chuyển nhà & văn phòng</a></li>
-                        <li><a href="@Url.Action("DetailsService")">Cho thuê nhân công</a></li>
-                        <li><a href="@Url.Action("DetailsService")">Cho thuê xe nâng cẩu</a></li>
+                        <li class="active"><a href="@Url.Action("Service")">Tổng quan</a></li>
+                        <li><a href="@Url.Action("DetailsService","Home",new { id = 1 })">Bốc xếp hàng hóa</a></li>
+                        <li><a href="@Url.Action("DetailsService","Home",new { id = 2 })">Chuyển nhà & văn phòng</a></li>
+                        <li><a href="@Url.Action("DetailsService","Home",new { id = 3 })">Cho thuê nhân công</a></li>
+                        <li><a href="@Url.Action("DetailsService","Home",new { id = 4 })">Cho thuê xe nâng cẩu</a></li>
                     </ul>
                     <h4 class="pt-xl mb-md text-color-dark">Liên hệ</h4>
                     <p>Liên hệ với chúng tôi hoặc gọi cho chúng tôi để nhận được sự giúp đỡ.</p>
                     <ul class="list list-icons mt-xlg mb-xlg">
-                        <li><i class="icon-pin icons"></i> <strong>Địa chỉ:</strong> 1234 Street Name, City Name</li>
-                        <li><i class="icon-call-end icons"></i> <strong>Điện thoại:</strong> (123) 456-789</li>
-                        <li><i class="icon-envelope icons"></i> <strong>Email:</strong> <a href="mailto:mail@example.com">mail@example.com</a></li>
+                        <li><i class="icon-pin icons"></i> <strong>Địa chỉ:</strong> Số 117, Đường Đình Phong Phú, Phường Tăng Nhơn Phú B, Quận 9, TP HCM</li>
+                        <li><i class="icon-call-end icons"></i> <strong>Điện thoại:</strong> 0367.99.89.79</li>
+                        <li><i class="icon-envelope icons"></i> <strong>Email:</strong> <a href="mailto:Bocxepanhtu@gmail.com">Bocxepanhtu@gmail.com</a></li>
                     </ul>
                 </aside>
 
@@ -44,9 +44,11 @@
                                 <img src="~/img/demos/construction/icons/construction.png" alt="" class="img-responsive" />
                             </div>
                             <div class="feature-box-info ml-xlg">
-                                <h4 class="mb-sm">General Construction</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque rutrum pellentesque imperdiet. Quisque rutrum pellentesque imperdiet. Nulla lacinia iaculis nulla.</p>
-                                <a class="mt-md" href="demo-construction-services-detail.html">Learn More <i class="fa fa-long-arrow-right"></i></a>
+                                <h4 class="mb-sm">Bốc xếp hàng hóa</h4>
+                                <p>
+                                    Dịch vụ bốc xếp hàng hóa Công ty chúng tôi tiếp nhận cuộc gọi dịch vụ và chăm sóc khách hàng 24/24, làm việc 24/24 theo khung giờ quý khách hàng chọn lựa.
+                                 </p>
+                                <a class="mt-md" href="demo-construction-services-detail.html">Xem chi tiết <i class="fa fa-long-arrow-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -58,9 +60,11 @@
                                 <img src="~/img/demos/construction/icons/plumbing.png" alt="" class="img-responsive" />
                             </div>
                             <div class="feature-box-info ml-xlg">
-                                <h4 class="mb-sm">Plumbing</h4>
-                                <p>Lorem ipsum dolor sit amet Quisque rutrum pellentesque imperdietonsectetur adipiscing metus elit. Quisque rutrum pellentesque imperdiet.</p>
-                                <a class="mt-md" href="demo-construction-services-detail.html">Learn More <i class="fa fa-long-arrow-right"></i></a>
+                                <h4 class="mb-sm">Chuyển nhà & văn phòng</h4>
+                                <p>
+                                    Dịch vụ chuyển nhà chúng tôi luôn mang đến cho quý khách hài lòng, và từng ngày xây dựng được lòng tin tưởng với khách hàng. Không chỉ cam kết chất lượng dịch vụ hàng đầu về sự chuyên nghiệp, uy tín mà chúng tôi còn có giá dịch vụ tốt nhất.
+                                </p>
+                                <a class="mt-md" href="demo-construction-services-detail.html">Xem chi tiết <i class="fa fa-long-arrow-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -72,9 +76,11 @@
                                 <img src="~/img/demos/construction/icons/painting.png" alt="" class="img-responsive" />
                             </div>
                             <div class="feature-box-info ml-xlg">
-                                <h4 class="mb-sm">Painting</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur. Quisque rutrum pellentesque imperdiet. adipiscing metus elit. Quisque rutrum pellentesque imperdiet.</p>
-                                <a class="mt-md" href="demo-construction-services-detail.html">Learn More <i class="fa fa-long-arrow-right"></i></a>
+                                <h4 class="mb-sm">Cho thuê nhân công</h4>
+                                <p>
+                                    Dịch vụ Cho thuê nhân công bốc xếp tại Tphcm,Bình Dương,quý khách có nhu cầu chuyển kho xưởng hoặc thuê nhân công bốc xếp kho chuyên nghiệp.Hãy đến với chúng tôi,công ty chúng tôi sẽ nhanh chóng cử công nhân , đến tận nơi.
+                                </p>
+                                <a class="mt-md" href="demo-construction-services-detail.html">Xem chi tiết <i class="fa fa-long-arrow-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -86,9 +92,11 @@
                                 <img src="~/img/demos/construction/icons/ground-construction.png" alt="" class="img-responsive" />
                             </div>
                             <div class="feature-box-info ml-xlg">
-                                <h4 class="mb-sm">Pre-Construction</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque rutrum pellentesque imperdiet. Quisque rutrum pellentesque imperdiet. Nulla lacinia iaculis nulla.</p>
-                                <a class="mt-md" href="demo-construction-services-detail.html">Learn More <i class="fa fa-long-arrow-right"></i></a>
+                                <h4 class="mb-sm">Cho thuê xe nâng cẩu</h4>
+                                <p>
+                                    Dịch vụ cho thuê xe nâng cẩu Công ty chúng tôi luôn cung cấp các lọa thiết bị máy móc nhằm phục vụ khách hàng một cách hiệu quả nhất.
+                                </p>
+                                <a class="mt-md" href="demo-construction-services-detail.html">Xem chi tiết <i class="fa fa-long-arrow-right"></i></a>
                             </div>
                         </div>
                     </div>

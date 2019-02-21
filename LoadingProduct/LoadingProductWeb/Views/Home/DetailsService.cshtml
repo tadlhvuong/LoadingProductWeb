@@ -1,8 +1,8 @@
 ﻿
 @{
     ViewData["Title"] = "DetailsService";
+    Service service = ViewData["DetailService"] as Service;
 }
-
 <div role="main" class="main">
     <section class="section section-tertiary section-no-border pb-md mt-none">
         <div class="container">
@@ -13,74 +13,109 @@
             </div>
         </div>
     </section>
-
     <div class="container">
-
         <div class="row pt-sm mb-xl">
             <div class="col-md-3">
                 <aside class="sidebar">
                     <ul class="nav nav-list mb-xl show-bg-active">
                         <li><a href="@Url.Action("Service")">Tổng quan</a></li>
-                        <li><a href="@Url.Action("DetailsService")">Bốc xếp</a></li>
-                        <li class="active"><a href="@Url.Action("DetailsService")">Chuyển nhà & văn phòng</a></li>
-                        <li><a href="@Url.Action("DetailsService")">Cho thuê nhân công</a></li>
-                        <li><a href="@Url.Action("DetailsService")">Cho thuê xe nâng cẩu</a></li>
+                        @if (service.id == 1)
+                        {
+                           <li class="active"><a href="@Url.Action("DetailsService","Home",new { id = 1 })">Bốc xếp hàng hóa</a></li>
+                        }
+                        else
+                        {
+                           <li><a href="@Url.Action("DetailsService","Home",new { id = 1 })">Bốc xếp hàng hóa</a></li>
+                        }
+
+                        @if (service.id == 2)
+                        {
+                           <li class="active"><a href="@Url.Action("DetailsService","Home",new { id = 2 })">Chuyển nhà & văn phòng</a></li>
+                        }
+                        else
+                        {
+                        <li><a href="@Url.Action("DetailsService","Home",new { id = 2 })">Chuyển nhà & văn phòng</a></li>
+                        }
+
+                        @if (service.id == 3)
+                        {
+                           <li class="active"><a href="@Url.Action("DetailsService","Home",new { id = 3 })">Cho thuê nhân công</a></li>
+                        }
+                        else
+                        {
+                        <li><a href="@Url.Action("DetailsService","Home",new { id = 3 })">Cho thuê nhân công</a></li>
+                        }
+
+                        @if (service.id == 4)
+                        {
+                           <li class="active"><a href="@Url.Action("DetailsService","Home",new { id = 4 })">Cho thuê xe nâng cẩu</a></li>
+                        }
+                        else
+                        {
+                        <li><a href="@Url.Action("DetailsService","Home",new { id = 4 })">Cho thuê xe nâng cẩu</a></li>
+                        }
                     </ul>
                     <h4 class="pt-xl mb-md text-color-dark">Liên hệ</h4>
                     <p>Liên hệ với chúng tôi hoặc gọi cho chúng tôi để nhận được sự giúp đỡ.</p>
                     <ul class="list list-icons mt-xlg mb-xlg">
-                        <li><i class="icon-pin icons"></i> <strong>Địa chỉ:</strong> 1234 Street Name, City Name</li>
-                        <li><i class="icon-call-end icons"></i> <strong>Điện thoại:</strong> (123) 456-789</li>
-                        <li><i class="icon-envelope icons"></i> <strong>Email:</strong> <a href="mailto:mail@example.com">mail@example.com</a></li>
+                        <li><i class="icon-pin icons"></i> <strong>Địa chỉ:</strong> Số 117, Đường Đình Phong Phú, Phường Tăng Nhơn Phú B, Quận 9, TP HCM</li>
+                        <li><i class="icon-call-end icons"></i> <strong>Điện thoại:</strong> 0367.99.89.79</li>
+                        <li><i class="icon-envelope icons"></i> <strong>Email:</strong> <a href="mailto:Bocxepanhtu@gmail.com">Bocxepanhtu@gmail.com</a></li>
                     </ul>
 
                 </aside>
-
             </div>
             <div class="col-md-9">
-
-                <h2 class="mb-sm">General Construction</h2>
-
+                <h2 class="mb-sm">@service.title</h2>
                 <img class="img-responsive pull-right ml-xlg mb-xl mt-xl" src="~/img/demos/construction/icons/construction.png" alt="" />
-
-                <p class="lead mb-xl mt-lg">Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittisem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbiacumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non  mauris vitae erat consequat.</p>
-
-                <p>Gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris.</p>
-
-                <div class="row">
-                    <div class="col-md-5">
-                        <p class="pb-xl">Lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non  mauris vitae erat consequat. Lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare.</p>
-                    </div>
-                    <div class="col-md-7">
-                        <div class="nivo-slider pb-xl mb-xl">
-                            <div class="slider-wrapper theme-default">
-                                <div id="nivoSlider" class="nivoSlider mt-none mb-xlg">
-                                    <img src="~/img/demos/construction/slides/slide-construction-small-1.jpg" data-thumb="~/img/demos/construction/slides/slide-construction-small-1.jpg" alt="" />
-                                    <img src="~/img/demos/construction/slides/slide-construction-small-2.jpg" data-thumb="~/img/demos/construction/slides/slide-construction-small-2.jpg" alt="" />
-                                    <img src="~/img/demos/construction/slides/slide-construction-small-3.jpg" data-thumb="~/img/demos/construction/slides/slide-construction-small-3.jpg" alt="" />
-                                    <img src="~/img/demos/construction/slides/slide-construction-small-4.jpg" data-thumb="~/img/demos/construction/slides/slide-construction-small-4.jpg" alt="" />
-                                </div>
-                                <div id="htmlcaption" class="nivo-html-caption"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <p>Gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris.</p>
-
-                <h4 class="mt-xlg mb-md">Our Process</h4>
-
+                <p class="lead mb-xl mt-lg"> @service.preview </p>
+                <p>@service.content</p>                              
+                <h4 class="mt-xlg mb-md">Quy trình làm việc </h4>
                 <ul class="list list-icons list-primary mt-xl mb-xlg">
-                    <li class="appear-animation" data-appear-animation="fadeInUp" data-appear-animation-delay="0"><i class="fa fa-check"></i> Fusce sit amet orci quis arcu vestibulum vestibulum.</li>
-                    <li class="appear-animation" data-appear-animation="fadeInUp" data-appear-animation-delay="300"><i class="fa fa-check"></i> Amet orci quis arcu vestibulum vestibulum.</li>
-                    <li class="appear-animation" data-appear-animation="fadeInUp" data-appear-animation-delay="600"><i class="fa fa-check"></i> Orci quis arcu vestibulum vestibulum.</li>
-                    <li class="appear-animation" data-appear-animation="fadeInUp" data-appear-animation-delay="900"><i class="fa fa-check"></i> Fuscesit amet orci quis arcu vestibulum vestibulum.</li>
-                </ul>
+                    <li class="appear-animation" data-appear-animation="fadeInUp" data-appear-animation-delay="0">
+                        <i class="fa fa-check"></i> 1. Tiếp nhận thông tin  khách hàng: 
+                        <p> - Nhận cuộc gọi và thiết lập cuộc hẹn với khách hàng: địa chỉ, số điện thoại, thời gian xin gặp trực tiếp Khách hàng để khảo sát ... </p>
+                    </li>
 
+                    <li class="appear-animation" data-appear-animation="fadeInUp" data-appear-animation-delay="300">
+                        <i class="fa fa-check"></i> 2. Khảo sát và đưa ra phương án bốc xếp:
+                        <p> 
+                        - Khảo sát vị trí bốc hàng và nơi xếp hàng : Từ container , xe tải … đến kho , cửa hàng.. và ngược lại. <br>
+                        - Phương án: Từ container nếu hàng nặng quá thì dùng xe nâng nâng hàng hóa xuống và di chuyển đến nơi cần xếp <br>
+                        - Hàng hóa đóng kiện có thể dùng bẩy ( xà cầy , búa , dao , kéo ..) để phá kiện và bốc xếp xuống và đưa vào vị trí quý khách yêu cầu.<br>
+                        - Nếu từ vị trí bốc hàng đến vị trí xếp hàng xa từ 15m trở lên có thể dùng xe đẩy để di chuyển cho nhanh.<br>
+                        </p>
+                    </li>
+                    <li class="appear-animation" data-appear-animation="fadeInUp" data-appear-animation-delay="600">
+                        <i class="fa fa-check"></i> 3. Báo giá bốc xếp:
+                        <p> - Chi phí sẽ tùy theo khối lượng hàng hóa , loại hàng hóa , đoạn đường di chuyển , lên tầng bằng cầu thang máy hay bộ , đêm hay ngày nhưng Công ty chúng luôn cam kết giá cạnh tranh nhất TPHCM</p>
+                    </li>
+                    <li class="appear-animation" data-appear-animation="fadeInUp" data-appear-animation-delay="900">
+                        <i class="fa fa-check"></i> 4.Ký hợp đồng bốc xếp:
+                        <p> - Khách đồng ý với báo giá và phương án vận chuyển của chúng tôi. Nhân viên khảo sát sẽ ký hợp đồng trực tiếp với Quý khách. Trong hợp đồng thể hiện rõ quyền lợi và trách nhiệm của hai bên </p>
+                    </li>
+                    <li class="appear-animation" data-appear-animation="fadeInUp" data-appear-animation-delay="900">
+                        <i class="fa fa-check"></i> 5. Thực hiện hợp đồng:
+                        <p>
+                            – Chúng tôi sẽ gửi đội ngũ bốc xếp nhanh chóng đến địa điểm quý khách yêu cầu. <br>
+                            – Quý khách sẽ kiểm tra số lượng và chất lượng hàng hóa trước khi di chuyển. <br>
+                            – Lập biên bản bàn giao, xác nhận số lượng đồ đạc, hàng hóa.<br>
+                            – Xác định số lượng hàng hóa để chủ động nguồn lực và các loại xe hỗ trợ công việc bốc xếp và vận chuyển đến địa chỉ mới như xe nâng, xe đẩy , xe kéo …cho phù hợp.<br>
+                            – Hàng hóa sẽ được đóng gói cẩn thận bằng vật liệu chuyên dụng và chú thích rõ ràng.<br>
+                            – Hàng hóa sẽ được phân loại, sắp xếp theo cùng chủng loại hoặc vị trí trước đó và có ghi chú.<br>
+                            – Hàng hóa lớn hoặc đặc biệt sẽ có những thiết bị chuyên nghiệp di chuyển với sự chuyên nghiệp của đội ngũ công nhân.<br>
+                            – Nhân viên của chúng tôi sẽ có những kế hoạch bốc xếp thông minh, an toàn và nhanh chóng, tiết kiệm tối đa thời gian, công sức cho Quý khách.<br>
+                        </p>
+                    </li> 
+                    <li class="appear-animation" data-appear-animation="fadeInUp" data-appear-animation-delay="900">
+                        <i class="fa fa-check"></i> 6. Nghiệm thu công việc và thanh toán hợp đồng.
+                        <p>
+                            – Ngay sau khi Quý khách hàng và Công ty chúng tôi nghiệm thu, bàn giao toàn bộ các hạng mục công việc đã thực hiện, hai bên sẽ tiến hành thanh lý Hợp đồng.
+                        </p>
+                    </li> 
+                </ul>
             </div>
         </div>
-
     </div>
 </div>
-
 
