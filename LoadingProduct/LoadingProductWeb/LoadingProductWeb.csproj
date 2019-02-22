@@ -40,6 +40,7 @@
     <Content Remove="wwwroot\img\banner\banner4.jpg" />
     <Content Remove="wwwroot\img\banner\banner5.jpg" />
     <Content Remove="wwwroot\img\banner\banner6.jpg" />
+    <Content Remove="wwwroot\img\banner\banner7.jpg" />
   </ItemGroup>
   <ItemGroup>
     <None Include="wwwroot\img\demos\construction\logoAT.png" />
@@ -69,6 +70,7 @@
     <None Include="wwwroot\img\banner\banner4.jpg" />
     <None Include="wwwroot\img\banner\banner5.jpg" />
     <None Include="wwwroot\img\banner\banner6.jpg" />
+    <None Include="wwwroot\img\banner\banner7.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="wwwroot\img\banner\" />
