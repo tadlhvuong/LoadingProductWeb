@@ -6,73 +6,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="BuildBundlerMinifier" Version="2.8.391" />
+    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.4" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.6" PrivateAssets="All" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.1.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Remove="wwwroot\img\demos\construction\logoAT.png" />
-    <Content Remove="wwwroot\img\demos\construction\logoAT_Chu.png" />
-    <Content Remove="wwwroot\img\icons\hoanthanh.jpg" />
-    <Content Remove="wwwroot\img\icons\thoathuan.jpg" />
-    <Content Remove="wwwroot\img\icons\tiepnhan.jpg" />
-    <Content Remove="wwwroot\img\icons\tiepnhan.png" />
-    <Content Remove="wwwroot\img\icons\tienhanh.png" />
-    <Content Remove="wwwroot\img\banner\banner1.jpg" />
-    <Content Remove="wwwroot\img\banner\banner2.jpg" />
-    <Content Remove="wwwroot\img\icons\camket.jpg" />
-    <Content Remove="wwwroot\img\icons\kinhnghiem.jpg" />
-    <Content Remove="wwwroot\img\icons\quytrinh.jpg" />
-    <Content Remove="wwwroot\img\icons\tuvan.png" />
-    <Content Remove="wwwroot\img\icons\bocxep.jpg" />
-    <Content Remove="wwwroot\img\icons\chuyenvp.png" />
-    <Content Remove="wwwroot\img\icons\thuenhancong.jpg" />
-    <Content Remove="wwwroot\img\icons\thuexe.png" />
-    <Content Remove="wwwroot\img\office\1.jpg" />
-    <Content Remove="wwwroot\img\office\2.jpg" />
-    <Content Remove="wwwroot\img\office\3.jpg" />
-    <Content Remove="wwwroot\img\office\4.jpg" />
-    <Content Remove="wwwroot\img\office\5.jpg" />
-    <Content Remove="wwwroot\img\office\6.jpg" />
-    <Content Remove="wwwroot\img\office\7.jpg" />
-    <Content Remove="wwwroot\img\banner\banner3.jpg" />
-    <Content Remove="wwwroot\img\banner\banner4.jpg" />
-    <Content Remove="wwwroot\img\banner\banner5.jpg" />
-    <Content Remove="wwwroot\img\banner\banner6.jpg" />
-    <Content Remove="wwwroot\img\banner\banner7.jpg" />
+    <ProjectReference Include="..\LoadingProductShared\LoadingProductShared.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="wwwroot\img\demos\construction\logoAT.png" />
-    <None Include="wwwroot\img\demos\construction\logoAT_Chu.png" />
-    <None Include="wwwroot\img\icons\hoanthanh.jpg" />
-    <None Include="wwwroot\img\icons\thoathuan.jpg" />
-    <None Include="wwwroot\img\icons\tiepnhan.png" />
-    <None Include="wwwroot\img\icons\tienhanh.png" />
-    <None Include="wwwroot\img\banner\banner1.jpg" />
-    <None Include="wwwroot\img\banner\banner2.jpg" />
-    <None Include="wwwroot\img\icons\camket.jpg" />
-    <None Include="wwwroot\img\icons\kinhnghiem.jpg" />
-    <None Include="wwwroot\img\icons\quytrinh.jpg" />
-    <None Include="wwwroot\img\icons\tuvan.png" />
-    <None Include="wwwroot\img\icons\bocxep.jpg" />
-    <None Include="wwwroot\img\icons\chuyenvp.png" />
-    <None Include="wwwroot\img\icons\thuenhancong.jpg" />
-    <None Include="wwwroot\img\icons\thuexe.png" />
-    <None Include="wwwroot\img\office\1.jpg" />
-    <None Include="wwwroot\img\office\2.jpg" />
-    <None Include="wwwroot\img\office\3.jpg" />
-    <None Include="wwwroot\img\office\4.jpg" />
-    <None Include="wwwroot\img\office\5.jpg" />
-    <None Include="wwwroot\img\office\6.jpg" />
-    <None Include="wwwroot\img\office\7.jpg" />
-    <None Include="wwwroot\img\banner\banner3.jpg" />
-    <None Include="wwwroot\img\banner\banner4.jpg" />
-    <None Include="wwwroot\img\banner\banner5.jpg" />
-    <None Include="wwwroot\img\banner\banner6.jpg" />
-    <None Include="wwwroot\img\banner\banner7.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="wwwroot\img\banner\" />
-  </ItemGroup>
+
 </Project>

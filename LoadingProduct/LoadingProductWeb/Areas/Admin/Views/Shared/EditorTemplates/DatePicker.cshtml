@@ -1,0 +1,14 @@
+﻿@{
+    var fieldName = ViewData.TemplateInfo.HtmlFieldPrefix;
+    var jsConfigs = Newtonsoft.Json.Linq.JObject.FromObject(ViewData["Config"] ?? new { format = "yyyy-mm-dd" });
+    var jsConfigText = new Microsoft.AspNetCore.Html.HtmlString(jsConfigs.ToString());
+}
+<input class="form-control text-box single-line" id="@fieldName" name="@fieldName" type="text" value="@ViewData["Value"]">
+@if (Context.Items["DatePickerScriptRendered"] == null)
+{
+    <script src="~/js/bootstrap-datepicker.min.js"></script>
+    Context.Items["DatePickerScriptRendered"] = true;
+}
+<script>
+    $("#@fieldName").datepicker(@jsConfigText);
+</script>

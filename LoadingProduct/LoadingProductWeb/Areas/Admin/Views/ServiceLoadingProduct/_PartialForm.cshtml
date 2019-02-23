@@ -1,0 +1,56 @@
+﻿@using LoadingProductWeb.Areas.Admin.Models
+@model Service
+@{
+    Layout = null;
+}
+
+<div class="form-horizontal">
+    @Html.HiddenFor(m => m.Id)
+    @Html.HiddenFor(m => m.CreateUser)
+    @Html.HiddenFor(m => m.CreateTime)
+
+    <div class="row">
+        <div class="col-md-7">
+            <div class="form-group">
+                <label asp-for="Title" class="col-sm-3 control-label"></label>
+                <div class="col-sm-9">
+                    <input asp-for="Title" class="form-control" , @required="" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="TitleEn" class="col-sm-3 control-label"></label>
+                <div class="col-sm-9">
+                    <input asp-for="TitleEn" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Preview" class="col-sm-3 control-label"></label>
+                <div class="col-sm-9">
+                    <input asp-for="Preview" class="form-control" , @required="" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="PreviewEn" class="col-sm-3 control-label"></label>
+                <div class="col-sm-9">
+                    <input asp-for="PreviewEn" class="form-control" />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="thumb-info mb-md">
+                @Html.HiddenFor(m => m.Image)
+                <img src="@Model.Image" id="avatar" class="rounded img-responsive" alt="">
+                <div class="thumb-info-title">
+                    <a class="btn btn-primary" href="@Url.Action(" FileBrowser", "Media" , new { @input="Image" , @image="avatar" })" data-modal="" title="Cập nhật hình đại diện"><i class="fa fa-edit"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <h1>Nội dung</h1>
+    <div class="form-group">
+        <div class="col-md-12">
+            @Html.SummerNoteFor(m => m.Content)
+        </div>
+    </div>
+</div>
