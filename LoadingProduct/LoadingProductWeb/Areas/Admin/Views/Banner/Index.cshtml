@@ -2,7 +2,7 @@
 @model PagedList<Service>
 @{
     ViewBag.Icon = "fas fa-newspaper-o";
-    ViewBag.Title = "Danh mục dịch vụ bốc xếp";
+    ViewBag.Title = "Danh mục banner";
 }
 
 <section role="main" class="content-body">
@@ -17,7 +17,7 @@
                 </li>
                 <li>
                     <a asp-action="Index">
-                        <i class="fa fa-newspaper-o"></i> Dịch vụ
+                        <i class="fa fa-newspaper-o"></i> Bài viết
                     </a>
                 </li>
                 <li>
@@ -39,11 +39,11 @@
                         <td>
                             <select asp-for="PageSize" asp-items="Model.PageSelectList" class="form-control" style="width:120px;" onchange="this.form.submit();"></select>
                         </td>
-                        <td>
+                        @*<td>
                             <select asp-for="Filter" asp-items="@Html.GetEnumSelectList(typeof(EntityStatus))" class="form-control" style="width:160px;" onchange="this.form.submit();">
                                 <option value="">== Trạng thái ==</option>
                             </select>
-                        </td>
+                        </td>*@
                         <td><input asp-for="Search" class="form-control" @style="width:240px;" @placeholder="Search" /></td>
                         <td><button class="btn btn-default" type="submit"><i class="fa fa-search"></i> Search</button></td>
                     </tr>
@@ -62,7 +62,6 @@
                     <th>Người tạo</th>
                     <th>Ngày tạo</th>
                     <th>Người cập nhật</th>
-                    <th>Ngày đăng</th>
                     <th>Thao tác</th>
                 </tr>
             </thead>
@@ -83,9 +82,8 @@
                     <td>@Html.DisplayFor(m => item.CreateUser)</td>
                     <td>@Html.DisplayFor(m => item.CreateTime)</td>
                     <td>@Html.DisplayFor(m => item.UpdateUser)</td>
-                    <td>@Html.DisplayFor(m => item.PublishTime)</td>
                     <td>
-                        @*@Html.DetailsLink("Details", new { id = item.Id })*@
+                        @Html.DetailsLink("Details", new { id = item.Id })
                         @Html.UpdateLink("Update", new { id = item.Id })
                         @Html.DeleteLink("Delete", new { id = item.Id }, true)
                     </td>

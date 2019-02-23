@@ -4,8 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using LoadingProductShared.Data;
 using LoadingProductShared.Helpers;
+using LoadingProductWeb.Admin.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace LoadingProductWeb.Areas.Admin.Controllers
@@ -72,5 +74,58 @@ namespace LoadingProductWeb.Areas.Admin.Controllers
                 return View();
             }
         }
+        public IActionResult Update(int id)
+        {
+            var model = _dbContext.Services.Find(id);
+            if (model == null)
+                return BadRequest();
+
+           return View(model);
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public ActionResult Update(Service model)
+        {
+            if (ModelState.IsValid)
+            {
+                model.LastUpdate = DateTime.Now;
+                model.UpdateUser = User.Identity.Name;
+                _dbContext.Entry(model).State = EntityState.Modified;
+                _dbContext.SaveChanges();
+                
+                _dbContext.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(model);
+        }
+
+        // GET: BlogPost/Delete/5
+        public IActionResult Delete(int? id)
+        {
+            var model = _dbContext.Services.Find(id);
+            if (model == null)
+                return NotFound();
+
+            return View(model);
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public IActionResult Delete(Service model)
+        {
+            try
+            {
+                _dbContext.Entry(model).State = EntityState.Deleted;
+                _dbContext.SaveChanges();
+                return Json(new ModalFormResult() { Code = 1 });
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, ex.Message);
+            }
+
+            return View(model);
+        }
+
     }
 }

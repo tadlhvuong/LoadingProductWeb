@@ -4,7 +4,7 @@
 @model PagedList<MediaFile>
 @{
     ViewBag.Icon = "fa-image";
-    ViewBag.Title = "Thư Viện";
+    ViewBag.Title = "Ảnh banner";
     string[] previewData = Model.Content.Select(x => x.FileLink).ToArray();
     object[] previewConfig = Model.Content.Select(x => new { key = x.Id, caption = x.FileName, size = x.FileSize, showDrag = false, width = "120px" }).ToArray();
     var x1 = new HtmlString(JsonConvert.SerializeObject(previewData));
@@ -45,12 +45,12 @@
     {
     <script>
         $("#files").fileinput({
-            uploadUrl: "/Admin/Media/FileUpload",
+            uploadUrl: "/Admin/Media/FileUploadBanner",
             deleteUrl: "/Admin/Media/FileRemove",
             initialPreview: @x1,
             initialPreviewConfig: @x2,
             initialPreviewAsData: true,
-            overwriteInitial: false,    
+            overwriteInitial: false,
             maxFileSize: 2048,
             resizeImage: true,
             maxImageWidth: 2048,

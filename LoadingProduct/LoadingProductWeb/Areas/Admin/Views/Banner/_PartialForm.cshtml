@@ -36,12 +36,10 @@
                 </div>
             </div>
         </div>
+        <hr />
         <br />
         <div class="col-md-5">
-            @if (@Model.Image == null)
-            {
-                <label asp-for="Image" class="col-md-4 control-label" style="width: 100%; font-size: 25px; text-align:center;"></label>
-            }
+            <label asp-for="Image" class="col-md-4 control-label" style="font-size: 25px;"></label>
             <div class="thumb-info mb-md">
                 @Html.HiddenFor(m => m.Image)
                 <br />

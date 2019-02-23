@@ -5,6 +5,7 @@ using LoadingProductWeb.Areas.Admin.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -55,7 +56,7 @@ namespace LoadingProductWeb.Areas.Admin.Controllers
         {
             model.PageSize = 20;
 
-            var filterQuery = _dbContext.MediaFiles.Where(x => model.Search == null || x.FileName.Contains(model.Search) || x.MediaAlbum.FullName.Contains(model.Search));
+            var filterQuery = _dbContext.MediaFiles.Where(x => (model.Search == null || x.FileName.Contains(model.Search) || x.MediaAlbum.FullName.Contains(model.Search))&& x.MediaAlbum.ShortName.Equals("Default"));
             var selectQuery = filterQuery.OrderByDescending(x => x.Id).Skip((model.CurPage - 1) * model.PageSize).Take(model.PageSize);
 
             model.TotalRows = filterQuery.Count();
@@ -66,7 +67,23 @@ namespace LoadingProductWeb.Areas.Admin.Controllers
 
             return View(model);
         }
+        public IActionResult Banner(PagedList<MediaFile> model)
+        {
+            model.PageSize = 20;
 
+            //var filterQuery = _dbContext.MediaFiles.Include(y => y.MediaAlbum).Where(x => model.Search == null || x.FileName.Contains(model.Search) || x.MediaAlbum.FullName.Contains(model.Search) && x.MediaAlbum.ShortName.Equals("Banner"));
+
+            var filterQuery = _dbContext.MediaFiles.Include(x => x.MediaAlbum).Where(x => (model.Search == null || x.FileName.Contains(model.Search) || x.MediaAlbum.FullName.Contains(model.Search)) && x.MediaAlbum.ShortName.Equals("Banner"));
+            var selectQuery = filterQuery.OrderByDescending(x => x.Id).Skip((model.CurPage - 1) * model.PageSize).Take(model.PageSize);
+
+            model.TotalRows = filterQuery.Count();
+            model.Content = selectQuery.ToList();
+
+            foreach (var item in model.Content)
+                item.FileLink = Path.Combine(mediaUrl, item.FullPath);
+
+            return View(model);
+        }
         [HttpPost]
         public async Task<IActionResult> FileUpload(int? id, IEnumerable<IFormFile> files)
         {
@@ -77,6 +94,17 @@ namespace LoadingProductWeb.Areas.Admin.Controllers
             return await DoUploadFile(album, files, _dbContext);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> FileUploadBanner(int? id, IEnumerable<IFormFile> files)
+        {
+            var albumBanner = _dbContext.MediaAlbums.Include(x => x.MediaFiles).Where(x => x.ShortName.Equals("Banner")).Select(x=>x.Id).FirstOrDefault();
+
+            MediaAlbum album = GetDefaultAlbumBanner(albumBanner);
+            if (album == null)
+                return BadRequest("Could not create Default Album!");
+
+            return await DoUploadFile(album, files, _dbContext);
+        }
         private async Task<IActionResult> DoUploadFile(MediaAlbum album, IEnumerable<IFormFile> files, AppDBContext dbContext)
         {
             try
@@ -129,100 +157,7 @@ namespace LoadingProductWeb.Areas.Admin.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
-        [HttpPost]
-        public async Task<IActionResult> FileUploadCrop(FileUploadModel model)
-        {
-            MediaAlbum album = GetDefaultAlbum(model.Id);
-            if (album == null)
-                return BadRequest("Could not create Default Album!");
-
-            var fileData = model.FileData;
-            var pos = fileData.IndexOf(";base64,");
-            if (pos <= 0)
-                return BadRequest("Invalid FileData");
-
-            fileData = fileData.Substring(pos + 8);
-            var fileBytes = Convert.FromBase64String(fileData);
-
-            return await DoUploadFileCrop(album, model.FileName, fileBytes, _dbContext);
-        }
-
-        private async Task<IActionResult> DoUploadFileCrop(MediaAlbum album, string fileName, byte[] fileData, AppDBContext dbContext)
-        {
-            try
-            {
-                string albumDir = Path.Combine(mediaPath, album.ShortName);
-                if (!Directory.Exists(albumDir))
-                    Directory.CreateDirectory(albumDir);
-
-                string fileExt = string.IsNullOrEmpty(fileName) ? ".jpg" : Path.GetExtension(fileName);
-
-                string newName = "";
-                while (true)
-                {
-                    newName = Common.Random_Mix(6).ToLower() + fileExt;
-                    string filePath = Path.Combine(albumDir, newName);
-                    if (!System.IO.File.Exists(filePath))
-                    {
-                        await System.IO.File.WriteAllBytesAsync(filePath, fileData);
-                        break;
-                    }
-                }
-
-                MediaFile newFile = new MediaFile()
-                {
-                    AlbumId = album.Id,
-                    FullPath = Path.Combine(album.ShortName, newName),
-                    FileSize = fileData.Length,
-                    CreateTime = DateTime.Now
-                };
-
-                dbContext.MediaFiles.Add(newFile);
-                dbContext.SaveChanges();
-
-                var newFiles = new List<MediaFile> { newFile };
-                return new JsonResult(new FileUploadResult
-                {
-                    initialPreview = newFiles.Select(x => Path.Combine(mediaUrl, x.FullPath)).ToArray(),
-                    initialPreviewConfig = newFiles.Select(x => new { key = x.Id, caption = x.FileName, size = x.FileSize, showDrag = false }).ToArray(),
-                });
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
-        //[HttpPost]
-        //public async Task<IActionResult> FileUploadBlog(int? id, IEnumerable<IFormFile> files)
-        //{
-        //    ShopItem model = _dbContext.ShopItems.Find(id);
-        //    if (model == null)
-        //        return BadRequest();
-
-        //    if (model.MediaAlbum == null)
-        //    {
-        //        try
-        //        {
-        //            model.MediaAlbum = new MediaAlbum()
-        //            {
-        //                UserId = 1,
-        //                ShortName = string.Format("Blog{0:D4}", model.Id),
-        //                FullName = "Album " + model.Name,
-        //                CreateTime = DateTime.Now,
-        //            };
-
-        //            _dbContext.SaveChanges();
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            return BadRequest(ex.Message);
-        //        }
-        //    }
-
-        //    return await DoUploadFile(model.MediaAlbum, files, _dbContext);
-        //}
+    
 
         //[HttpPost]
         //public async Task<IActionResult> FileUploadProduct(int? id, IEnumerable<IFormFile> files)
@@ -278,7 +213,34 @@ namespace LoadingProductWeb.Areas.Admin.Controllers
 
             }
         }
+        private MediaAlbum GetDefaultAlbumBanner(int? id)
+        {
+            try
+            {
+                MediaAlbum album = _dbContext.MediaAlbums.FirstOrDefault(x => x.Id == id || x.ShortName == "Banner");
+                if (album == null)
+                {
+                    album = new MediaAlbum()
+                    {
+                        UserId = 1,
+                        ShortName = "Banner",
+                        FullName = "Banner Album",
+                        Description = "Album Banner",
+                        CreateTime = DateTime.Now,
+                    };
 
+                    _dbContext.MediaAlbums.Add(album);
+                    _dbContext.SaveChanges();
+                }
+
+                return album;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return null;
+            }
+        }
         private MediaAlbum GetDefaultAlbum(int? id)
         {
             try
@@ -301,8 +263,9 @@ namespace LoadingProductWeb.Areas.Admin.Controllers
 
                 return album;
             }
-            catch
+            catch(Exception ex)
             {
+                Console.WriteLine(ex);
                 return null;
             }
         }

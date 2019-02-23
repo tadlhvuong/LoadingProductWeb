@@ -34,27 +34,24 @@
                                 <li class="@(Html.IsActive("Media", "General") ? "nav-active" : "")">
                                     <a href="@Url.Action("FileManager", "Media")"><i class="fa fa-image"></i> Hình ảnh</a>
                                 </li>
+                                <li class="@(Html.IsActive("Media", "General") ? "nav-active" : "")">
+                                    <a href="@Url.Action("Banner", "Media")"><i class="fa fa-image"></i> Banner</a>
+                                </li>
                             </ul>
                         </li>
                     }
                     @if (User.IsInRole("Operator") || User.IsInRole("Manager"))
                     {
                         <li class="@(Html.IsActive("ServiceLoadingProduct") ? "nav-parent nav-expanded nav-active" : "nav-parent")">
-                            <a href="#"><i class="fa fa-newspaper-o"></i> <span>Dịch vụ</span></a>
+                            <a href="#"><i class="fa fa-cogs"></i> <span>Dịch vụ</span></a>
                             <ul class="nav nav-children">
                                 <li class="@(Html.IsActive("ServiceLoadingProduct", "Index") ? "nav-active" : "")">
-                                    <a href="@Url.Action("Index", "ServiceLoadingProduct")"><i class="fa fa-newspaper-o"></i> Dịch vụ</a>
+                                    <a href="@Url.Action("Index", "ServiceLoadingProduct")"><i class="fa fa-cogs"></i> Dịch vụ</a>
                                 </li>
                                 <li class="@(Html.IsActive("ServiceLoadingProduct", "Create") ? "nav-active" : "")">
-                                    <a href="@Url.Action("Create", "ServiceLoadingProduct")"><i class="fa fa-cubes"></i> Thêm dịch vụ</a>
+                                    <a href="@Url.Action("Create", "ServiceLoadingProduct")"><i class="fa fa-plus"></i> Thêm dịch vụ</a>
                                 </li>
                             </ul>
-                        </li>
-                    }
-                    @if (User.IsInRole("Admin"))
-                    {
-                        <li class="@(Html.IsActive("Reports", "General") ? "nav-active" : "")">
-                            <a href="@Url.Action("General", "Reports")"><i class="fa fa-line-chart"></i> Đơn hàng</a>
                         </li>
                     }
                     @*@if (User.IsInRole("Admin"))

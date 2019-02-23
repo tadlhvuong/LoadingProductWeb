@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LoadingProductWeb.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20190217074433_InitialDatabase")]
-    partial class InitialDatabase
+    [Migration("20190223043823_InitDatabase")]
+    partial class InitDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

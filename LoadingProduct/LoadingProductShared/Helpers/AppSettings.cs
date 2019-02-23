@@ -77,13 +77,13 @@ namespace LoadingProductShared.Helpers
                 var user = new AppUser()
                 {
                     UserName = "Admin",
-                    Email = "tadlhvuong@gmail.com",
+                    Email = "anhtu@gmail.com",
                     CreateTime = DateTime.Now,
                     LastUpdate = DateTime.Now,
                     Status = EntityStatus.Enabled,
                 };
 
-                var result = userManager.CreateAsync(user, "AdminP@ssW0rd123").Result;
+                var result = userManager.CreateAsync(user, "Anhtu123").Result;
                 if (result.Succeeded)
                 {
                     var roles = new string[] { "Admin", "Manager", "Operator" };

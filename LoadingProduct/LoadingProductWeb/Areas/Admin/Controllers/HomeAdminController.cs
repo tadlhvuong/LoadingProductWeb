@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Fish.Admin.Controllers;
 using LoadingProductShared.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -27,7 +28,7 @@ namespace LoadingProductWeb.Areas.Admin
 
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction(nameof(MemberController.Index), "Member");
         }
 
         #endregion
