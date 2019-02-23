@@ -31,7 +31,7 @@ namespace LoadingProductWeb.Areas.Admin.Controllers
             _logger = logger;
             _dbContext = dbContext;
 
-            mediaUrl = AppSettings.Strings["MediaUrl"] ?? "/media";
+            mediaUrl = AppSettings.Strings["MediaUrl"] ?? "/media1";
             mediaPath = AppSettings.Strings["MediaPath"] ?? "./wwwroot/media";
         }
 
