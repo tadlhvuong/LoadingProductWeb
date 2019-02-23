@@ -13,9 +13,6 @@ namespace LoadingProductShared.Data
         public virtual DbSet<MediaFile> MediaFiles { get; set; }
 
         public virtual DbSet<Taxonomy> Taxonomies { get; set; }
-        //public virtual DbSet<BlogPost> BlogPosts { get; set; }
-        //public virtual DbSet<BlogPostTaxo> BlogPostTaxoes { get; set; }
-        public virtual DbSet<Banner> Banners { get; set; }
         public virtual DbSet<Service> Services { get; set; }
 
         public virtual DbSet<UserThread> UserThreads { get; set; }

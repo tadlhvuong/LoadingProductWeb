@@ -152,46 +152,6 @@ namespace LoadingProductWeb.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("LoadingProductShared.Data.Banner", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int?>("AlbumId");
-
-                    b.Property<DateTime?>("CreateTime");
-
-                    b.Property<string>("CreateUser")
-                        .HasMaxLength(128);
-
-                    b.Property<string>("Image")
-                        .HasMaxLength(512);
-
-                    b.Property<DateTime?>("LastUpdate");
-
-                    b.Property<string>("Preview")
-                        .HasMaxLength(1024);
-
-                    b.Property<string>("PreviewEn")
-                        .HasMaxLength(1024);
-
-                    b.Property<DateTime?>("PublishTime");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(128);
-
-                    b.Property<string>("TitleEn")
-                        .HasMaxLength(128);
-
-                    b.Property<string>("UpdateUser")
-                        .HasMaxLength(128);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Banners");
-                });
-
             modelBuilder.Entity("LoadingProductShared.Data.MediaAlbum", b =>
                 {
                     b.Property<int>("Id")

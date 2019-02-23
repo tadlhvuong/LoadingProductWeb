@@ -71,29 +71,6 @@ namespace LoadingProductWeb.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Banners",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    AlbumId = table.Column<int>(nullable: true),
-                    CreateUser = table.Column<string>(maxLength: 128, nullable: true),
-                    UpdateUser = table.Column<string>(maxLength: 128, nullable: true),
-                    CreateTime = table.Column<DateTime>(nullable: true),
-                    LastUpdate = table.Column<DateTime>(nullable: true),
-                    PublishTime = table.Column<DateTime>(nullable: true),
-                    Title = table.Column<string>(maxLength: 128, nullable: false),
-                    TitleEn = table.Column<string>(maxLength: 128, nullable: true),
-                    Image = table.Column<string>(maxLength: 512, nullable: true),
-                    Preview = table.Column<string>(maxLength: 1024, nullable: true),
-                    PreviewEn = table.Column<string>(maxLength: 1024, nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Banners", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Services",
                 columns: table => new
                 {
@@ -477,9 +454,6 @@ namespace LoadingProductWeb.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
-
-            migrationBuilder.DropTable(
-                name: "Banners");
 
             migrationBuilder.DropTable(
                 name: "MediaFiles");
