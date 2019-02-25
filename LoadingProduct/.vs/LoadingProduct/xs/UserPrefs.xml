@@ -1,11 +1,11 @@
 ﻿<Properties StartupConfiguration="{1FABB45B-E997-461B-BA3D-E299ED9C3E52}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="LoadingProductWeb/Views/Home/About.cshtml">
+  <MonoDevelop.Ide.Workbench ActiveDocument="LoadingProductWeb/Views/Shared/_Layout.cshtml">
     <Files>
       <File FileName="LoadingProductWeb/Views/Home/DetailsService.cshtml" Line="70" Column="94" />
-      <File FileName="LoadingProductWeb/Views/Home/Index.cshtml" Line="107" Column="74" />
-      <File FileName="LoadingProductWeb/Views/Shared/_Layout.cshtml" Line="91" Column="37" />
+      <File FileName="LoadingProductWeb/Views/Home/Index.cshtml" Line="37" Column="51" />
+      <File FileName="LoadingProductWeb/Views/Shared/_Layout.cshtml" Line="116" Column="50" />
       <File FileName="LoadingProductWeb/Views/Shared/_PartialHeader.cshtml" Line="66" Column="47" />
-      <File FileName="LoadingProductWeb/Views/Home/About.cshtml" Line="61" Column="202" />
+      <File FileName="LoadingProductWeb/Views/Home/About.cshtml" Line="87" Column="52" />
       <File FileName="LoadingProductWeb/Views/Home/Contact.cshtml" Line="39" Column="71" />
       <File FileName="LoadingProductWeb/Views/Home/Portfolio.cshtml" Line="1" Column="1" />
       <File FileName="LoadingProductWeb/Views/Home/Privacy.cshtml" Line="1" Column="1" />
@@ -15,6 +15,8 @@
       <File FileName="LoadingProductWeb/Models/Service.cs" Line="19" Column="10" />
       <File FileName="LoadingProductWeb/Models/ErrorViewModel.cs" Line="1" Column="1" />
       <File FileName="LoadingProductWeb/Program.cs" Line="17" Column="1" />
+      <File FileName="LoadingProductWeb/wwwroot/css/custom.css" Line="208" Column="2" />
+      <File FileName="LoadingProductWeb/wwwroot/js/custom.js" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
