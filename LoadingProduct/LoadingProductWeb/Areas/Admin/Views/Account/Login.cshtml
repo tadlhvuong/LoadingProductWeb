@@ -1,0 +1,63 @@
+﻿@using LoadingProductWeb.Areas.Admin.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Đăng nhập Tài khoản";
+    string errorMsg = (string)TempData["TempDataProperty-ErrorMessage"];
+}
+<div class="panel-body">
+    @if (errorMsg != null)
+    {
+        <div class="alert alert-danger">@errorMsg</div>
+    }
+    <form method="post" autocomplete="off">
+        @Html.HiddenFor(m => m.ReturnUrl)
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group mb-lg">
+            <label asp-for="UserName"></label>
+            <div class="input-group input-group-icon">
+                <input asp-for="UserName" class="form-control input-lg" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+                <span class="input-group-addon">
+                    <span class="icon icon-lg">
+                        <i class="fa fa-user"></i>
+                    </span>
+                </span>
+            </div>
+        </div>
+        <div class="form-group mb-lg">
+            <label asp-for="Password"></label>
+            <div class="input-group input-group-icon">
+                <input asp-for="Password" class="form-control input-lg" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+                <span class="input-group-addon">
+                    <span class="icon icon-lg">
+                        <i class="fa fa-key"></i>
+                    </span>
+                </span>
+            </div>
+        </div>
+        <div class="row">
+            @*<div class="col-sm-6">
+                <div class="checkbox-custom checkbox-default">
+                    <input id="RememberMe" name="RememberMe" type="checkbox" value=false />
+                    <label asp-for="RememberMe"></label>
+                </div>
+            </div>*@
+            <div class=" text-right">
+                <button type="submit" class="btn btn-primary btn-block hidden-xs"><i class="fa fa-lock"></i> Đăng nhập</button>
+                <button type="submit" class="btn btn-primary btn-block btn-lg visible-xs mt-lg"><i class="fa fa-lock"></i> Đăng nhập</button>
+            </div>
+        </div>
+        @*<span class="mt-lg mb-lg line-thru text-center text-uppercase">
+            <span>hoặc</span>
+        </span>
+        <div class="mb-xs text-center">
+            <a class="btn btn-facebook mb-md ml-xs mr-xs" href="@Url.Action("LoginEx", "Account", new { Provider = "Facebook" })" title="Đăng nhập với Facebook"><i class="fa fa-facebook"></i> Facebook</a>
+            <a class="btn btn-gplus mb-md ml-xs mr-xs" href="@Url.Action("LoginEx", "Account", new { Provider = "Google" })" title="Đăng nhập với Google+"><i class="fa fa-google-plus"></i> Google+</a>
+        </div>*@
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_PartialValidation" />
+}

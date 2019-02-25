@@ -1,0 +1,20 @@
+﻿@{
+    var fieldName = ViewData.TemplateInfo.HtmlFieldPrefix;
+    var jsConfigs = Newtonsoft.Json.Linq.JObject.FromObject(ViewData["Config"] ?? new { @format = "YYYY-MM-DD HH:mm", @sideBySide = true });
+    var jsConfigText = new Microsoft.AspNetCore.Html.HtmlString(jsConfigs.ToString());
+}
+<div class="input-group date" id="@fieldName">
+    <input class="form-control text-box single-line" name="@fieldName" type="text" value="@ViewData["Value"]">
+    <span class="input-group-addon">
+        <span class="fa fa-calendar"></span>
+    </span>
+</div>
+@if (Context.Items["DateTimePickerScriptRendered"] == null)
+{
+    <script src="~/js/moment.min.js"></script>
+    <script src="~/js/bootstrap-datetimepicker.min.js"></script>
+    Context.Items["DateTimePickerScriptRendered"] = true;
+}
+<script>
+    $("#@fieldName").datetimepicker(@jsConfigText);
+</script>
